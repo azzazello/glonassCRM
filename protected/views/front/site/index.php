@@ -1,0 +1,1 @@
+<?print_r(Yii::app()->getModule('user')->registrationUrl) ?>
