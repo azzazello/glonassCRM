@@ -89,4 +89,38 @@ class MYChtml extends  CHtml
     }
 
 
+    public  static function toUTF8($str){
+        return iconv("windows-1251", "utf-8",$str);
+    }
+
+    public  static function fromUTF8($str){
+        return iconv("utf-8", "windows-1251",$str);
+    }
+
+    public static function  toArrayAndToUtf8($model,$keys)
+    {   $array = array();
+        foreach($model as $key=>$val) {
+            foreach ($keys as $k=>$v)
+            {
+             $array_temp[$k] = self::toUTF8($val->$v);
+                array_push($array,$array_temp);
+            }
+        }
+        return $array;
+    }
+
+    public  static  function alert_msg($msg){
+
+        return '<div class="alert alert-danger">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                '.$msg.'
+            </div>';
+
+    }
+    public  static  function success_msg($msg){
+        return '<div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        '.$msg.'
+        </div>';
+    }
 }

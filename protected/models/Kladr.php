@@ -11,6 +11,30 @@ class Kladr extends BaseKladr
 		return parent::model($className);
 	}
 
+    public static function getRegionNameByCladrCode($code) {
+
+        $kladr =  Kladr::model()->find(array(
+            "condition" => "`CODE` = :code",
+            "select"=> "substr(`CODE`,1,2) as code_region,NAME,SOCR",
+            "order"=>"NAME",
+            "params"=>array(":code"=>substr($code,0,2)."00000000000")
+        ));
+
+        return $kladr;
+    }
+
+    public static function getLocalityNameByCladrCode($code) {
+
+        $kladr =  Kladr::model()->find(array(
+            "condition" => "`CODE` = :code",
+            "select"=> "substr(`CODE`,1,2) as code_region,NAME,SOCR",
+            "order"=>"NAME",
+            "params"=>array(":code"=>$code)
+        ));
+        return $kladr;
+    }
+
+
 
     public  static function getRegions($is_array = false) {
         $kladr =  Kladr::model()->findAll(array(
@@ -35,18 +59,74 @@ class Kladr extends BaseKladr
         }
     }
 
+    public static function getLocalityInRegionArrayForSelect2($code,$name) {
+        $result = self::getLocalityInRegion($code,$name);
+        $socr = self::getSocrBase();
+
+        $array = array();
+        foreach($result as $key=>$val) {
+
+               $district = self::getDistrict($code,substr($val->CODE,2,3));
+                if ($district) {
+
+                    $district = ", ".$district->NAME." ".$socr[$district->SOCR];
+                }
+
+                $array_temp["id"] = MYChtml::toUTF8($val->CODE);
+                $array_temp["text"] = MYChtml::toUTF8( $val->NAME = $val->NAME.", ".mb_strtolower($socr[$val->SOCR]).$district);
+                array_push($array,$array_temp);
+
+        }
+
+        return $array;
+
+
+
+    }
+
     public static function getLocalityInRegion($code,$name) {
-        return Kladr::model()->findAll(array(
-            "condition" => "substr(`CODE`,1,3) = '".mysql_real_escape_string($code)."' and substr(`CODE`,6,8) != '00000000' and name like '%".mysql_real_escape_string($name)."%'",
-            "select"=> "substr(`CODE`,3,3) as code_district, *"
-        ));
+
+        if (strlen($name)>2) {
+            return Kladr::model()->findAll(array(
+                "condition" => "substr(`CODE`,1,2) = '".mysql_escape_string($code)."' and substr(`CODE`,6,8) != '000' and name like '%".MYChtml::fromUTF8($name)."%'",
+
+           ));
+
+        } else {
+            return Kladr::model()->findAll(array(
+
+                "condition" => "substr(`CODE`,1,2) = '".mysql_escape_string($code)."' and substr(`CODE`,6,8) != '000'",
+
+            ));
+
+        }
+
+
+
+    }
+
+    public static function getTextNameLocalityByKLADRcode($code) {
+
+        $socr = self::getSocrBase();
+        $region = self::getRegionNameByCladrCode($code);
+
+        $locality = self::getLocalityNameByCladrCode($code);
+        $district = self::getDistrict(substr($code,0,2),substr($code,2,3));
+
+
+        $name = $locality->NAME." ".mb_strtolower($socr[$locality->SOCR]);
+        if ($district) $name.= ", ".$district->NAME." ".mb_strtolower($socr[$district->SOCR]);
+        $name.= ", ".$region->NAME." ".mb_strtolower($socr[$region->SOCR]);
+
+        return $name;
 
     }
 
     public static function getDistrict($region, $code) {
 
         return Kladr::model()->find(array(
-            "condition" => "substr(`CODE`,1,2) = '".$region."' and substr(`CODE`,3,3) = '".$code."' and substr(`CODE`,6,8) = '00000000' and substr(`CODE`,3,11) != '00000000000'",
+            "condition" => " substr(`CODE`,1,5) = '".$region.$code."' and substr(`CODE`,6,8) = '00000000' and substr(`CODE`,3,11) != '00000000000'",
+
         ));
     }
 

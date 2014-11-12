@@ -15,8 +15,9 @@
  * @property integer $status_id
  * @property string $date_close
  * @property string $region_load_kladr_code
+ * @property string $locality_load_kladr_code
  * @property integer $region_unload_id
- * @property integer $stividor_id
+ * @property integer $stevedore_id
  * @property integer $culure_id
  * @property integer $trader_id
  * @property string $price
@@ -24,17 +25,17 @@
  * @property integer $scale
  * @property integer $load_type_id
  * @property string $where_calculation
- * @property integer $is_overload
  * @property integer $distance
  * @property string $date_load
+ * @property string $region_load_text
+ * @property string $description
  *
  * @property ReplyShipping[] $replyShippings
  * @property Culture $culure
  * @property LoadType $loadType
- * @property Kladr $regionLoadKladrCode
  * @property RegionUnload $regionUnload
  * @property Status $status
- * @property Stevedore $stividor
+ * @property Stevedore $stevedore
  * @property Trader $trader
  * @property Users $user
  */
@@ -58,13 +59,14 @@ abstract class BaseRequestShipping extends GxActiveRecord {
 
 	public function rules() {
 		return array(
-			array('date_create, user_id, date_close, region_load_kladr_code, region_unload_id, stividor_id, culure_id, trader_id, price, weight, scale, load_type_id, where_calculation, is_overload, distance, date_load', 'required'),
-			array('user_id, status_id, region_unload_id, stividor_id, culure_id, trader_id, weight, scale, load_type_id, is_overload, distance', 'numerical', 'integerOnly'=>true),
-			array('region_load_kladr_code', 'length', 'max'=>13),
+			array('date_create, user_id, date_close, region_load_kladr_code, locality_load_kladr_code, region_unload_id, stevedore_id, culure_id, trader_id, price, weight, scale, load_type_id, where_calculation, distance, date_load, region_load_text', 'required'),
+			array('user_id, status_id, region_unload_id, stevedore_id, culure_id, trader_id, weight, scale, load_type_id, distance', 'numerical', 'integerOnly'=>true),
+			array('region_load_kladr_code, locality_load_kladr_code', 'length', 'max'=>13),
 			array('price', 'length', 'max'=>10),
 			array('where_calculation', 'length', 'max'=>255),
-			array('status_id', 'default', 'setOnEmpty' => true, 'value' => null),
-			array('id, date_create, user_id, status_id, date_close, region_load_kladr_code, region_unload_id, stividor_id, culure_id, trader_id, price, weight, scale, load_type_id, where_calculation, is_overload, distance, date_load', 'safe', 'on'=>'search'),
+			array('description', 'safe'),
+			array('status_id, description', 'default', 'setOnEmpty' => true, 'value' => null),
+			array('id, date_create, user_id, status_id, date_close, region_load_kladr_code, locality_load_kladr_code, region_unload_id, stevedore_id, culure_id, trader_id, price, weight, scale, load_type_id, where_calculation, distance, date_load, region_load_text, description', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -73,10 +75,9 @@ abstract class BaseRequestShipping extends GxActiveRecord {
 			'replyShippings' => array(self::HAS_MANY, 'ReplyShipping', 'request_id'),
 			'culure' => array(self::BELONGS_TO, 'Culture', 'culure_id'),
 			'loadType' => array(self::BELONGS_TO, 'LoadType', 'load_type_id'),
-			'regionLoadKladrCode' => array(self::BELONGS_TO, 'Kladr', 'region_load_kladr_code'),
 			'regionUnload' => array(self::BELONGS_TO, 'RegionUnload', 'region_unload_id'),
 			'status' => array(self::BELONGS_TO, 'Status', 'status_id'),
-			'stividor' => array(self::BELONGS_TO, 'Stevedore', 'stividor_id'),
+			'stevedore' => array(self::BELONGS_TO, 'Stevedore', 'stevedore_id'),
 			'trader' => array(self::BELONGS_TO, 'Trader', 'trader_id'),
 			'user' => array(self::BELONGS_TO, 'Users', 'user_id'),
 		);
@@ -94,9 +95,10 @@ abstract class BaseRequestShipping extends GxActiveRecord {
 			'user_id' => null,
 			'status_id' => null,
 			'date_close' => Yii::t('app', 'Date Close'),
-			'region_load_kladr_code' => null,
+			'region_load_kladr_code' => Yii::t('app', 'Region Load Kladr Code'),
+			'locality_load_kladr_code' => Yii::t('app', 'Locality Load Kladr Code'),
 			'region_unload_id' => null,
-			'stividor_id' => null,
+			'stevedore_id' => null,
 			'culure_id' => null,
 			'trader_id' => null,
 			'price' => Yii::t('app', 'Price'),
@@ -104,16 +106,16 @@ abstract class BaseRequestShipping extends GxActiveRecord {
 			'scale' => Yii::t('app', 'Scale'),
 			'load_type_id' => null,
 			'where_calculation' => Yii::t('app', 'Where Calculation'),
-			'is_overload' => Yii::t('app', 'Is Overload'),
 			'distance' => Yii::t('app', 'Distance'),
 			'date_load' => Yii::t('app', 'Date Load'),
+			'region_load_text' => Yii::t('app', 'Region Load Text'),
+			'description' => Yii::t('app', 'Description'),
 			'replyShippings' => null,
 			'culure' => null,
 			'loadType' => null,
-			'regionLoadKladrCode' => null,
 			'regionUnload' => null,
 			'status' => null,
-			'stividor' => null,
+			'stevedore' => null,
 			'trader' => null,
 			'user' => null,
 		);
@@ -127,9 +129,10 @@ abstract class BaseRequestShipping extends GxActiveRecord {
 		$criteria->compare('user_id', $this->user_id);
 		$criteria->compare('status_id', $this->status_id);
 		$criteria->compare('date_close', $this->date_close, true);
-		$criteria->compare('region_load_kladr_code', $this->region_load_kladr_code);
+		$criteria->compare('region_load_kladr_code', $this->region_load_kladr_code, true);
+		$criteria->compare('locality_load_kladr_code', $this->locality_load_kladr_code, true);
 		$criteria->compare('region_unload_id', $this->region_unload_id);
-		$criteria->compare('stividor_id', $this->stividor_id);
+		$criteria->compare('stevedore_id', $this->stevedore_id);
 		$criteria->compare('culure_id', $this->culure_id);
 		$criteria->compare('trader_id', $this->trader_id);
 		$criteria->compare('price', $this->price, true);
@@ -137,9 +140,10 @@ abstract class BaseRequestShipping extends GxActiveRecord {
 		$criteria->compare('scale', $this->scale);
 		$criteria->compare('load_type_id', $this->load_type_id);
 		$criteria->compare('where_calculation', $this->where_calculation, true);
-		$criteria->compare('is_overload', $this->is_overload);
 		$criteria->compare('distance', $this->distance);
 		$criteria->compare('date_load', $this->date_load, true);
+		$criteria->compare('region_load_text', $this->region_load_text, true);
+		$criteria->compare('description', $this->description, true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria' => $criteria,
