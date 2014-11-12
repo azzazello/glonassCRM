@@ -21,7 +21,7 @@ class UserIdentity extends CUserIdentity
     public function authenticate()
     {
 
-		$users = Users::model()->find("login=:tel and password=:pass",array(":tel"=>$this->username, ":pass"=>md5($this->password)));
+		$users = Users::model()->find("LOWER(login)=:username and password=:password",array(":username"=>AccessoryFunctions::clearTel($this->username), ":password"=>md5($this->password)));
 
         if($users===null){
             $this->errorCode=self::ERROR_USERNAME_INVALID;
@@ -29,6 +29,10 @@ class UserIdentity extends CUserIdentity
         else
         {
             $this->_id=$users->id;
+            $users->last_in = new CDbExpression('NOW()');
+            $users->mobile_platform = 0;
+            $users->mobile_version = 0;
+            $users->save();
           //  Yii::app()->user->setState("role", $users->role);
             $this->errorCode=self::ERROR_NONE;
         }

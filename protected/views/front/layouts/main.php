@@ -12,24 +12,21 @@
     <link href="<?=Yii::app()->request->baseUrl;?>/css/select2.css" rel="stylesheet" />
 
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="js/html5shiv.js"></script>
-    <script src="js/respond.min.js"></script>
-    <![endif]-->
+    <script src="<?=Yii::app()->request->baseUrl;?>/js/jquery-1.11.1.min.js"></script>
+
 </head>
 <body>
-
+<style>
+    body{
+        color:#000000;
+    }
+    .label{
+        color:#000000 !important;
+    }
+    </style>
+<script>
+    var url = "<?=Yii::app()->request->baseUrl;?>";
+</script>
 <?php echo $content; ?>
-
-
-<script src="<?=Yii::app()->request->baseUrl;?>/js/jquery-1.11.1.min.js"></script>
-<script src="<?=Yii::app()->request->baseUrl;?>/js/jquery-migrate-1.2.1.min.js"></script>
-<script src="<?=Yii::app()->request->baseUrl;?>/js/jquery-ui-1.10.3.min.js"></script>
-<script src="<?=Yii::app()->request->baseUrl;?>/js/custom.js"></script>
-<script src="<?=Yii::app()->request->baseUrl;?>/js/select2.min.js"></script>
-<script src="<?=Yii::app()->request->baseUrl;?>/js/select2_locale_ru.js"></script>
-
-
 </body>
 </html>

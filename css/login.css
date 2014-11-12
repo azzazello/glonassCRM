@@ -1,0 +1,27 @@
+.col-sm-6 {
+    width: 100% !important;
+}
+.panel-body{
+    padding-bottom: 0px !important;
+}
+.loginMessages{
+    color: #ab1313;
+    text-align: center;
+}
+.forgotPasswordDiv{
+    display:none;
+}
+#Spinner{
+    display: none;
+    background-color:#FFFFFF;
+    width: 121px;
+}
+#code,#code_input,#divRepeat{
+    display: none;
+}
+#repeatSmS {
+    font-size: 12px;
+}
+#divRepeat{
+    padding: 5px 0;
+}

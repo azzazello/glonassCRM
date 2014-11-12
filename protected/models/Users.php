@@ -1,119 +1,94 @@
 <?php
 
-/**
- * This is the model class for table "users".
- *
- * The followings are the available columns in table 'users':
- * @property integer $id
- * @property string $login
- * @property string $password
- * @property integer $status
- * @property string $email
- * @property string $skype
- * @property string $phone
- * @property string $contact_fio
- * @property string $organization_name
- * @property string $rating
- *
- * The followings are the available model relations:
- * @property RequestShipping[] $requestShippings
- */
-class Users extends CActiveRecord
+Yii::import('application.models._base.BaseUsers');
+
+class Users extends BaseUsers
 {
-	/**
-	 * Returns the static model of the specified AR class.
-	 * @param string $className active record class name.
-	 * @return Users the static model class
-	 */
-	public static function model($className=__CLASS__)
-	{
+    public $Model;
+    public $data;
+
+    public $post;
+    public $model;
+    public $oldPassword;
+
+	public static function model($className=__CLASS__) {
 		return parent::model($className);
 	}
 
-	/**
-	 * @return string the associated database table name
-	 */
-	public function tableName()
-	{
-		return 'users';
-	}
+    public function relations()
+    {
+        return array(
+            'requestShippings' => array(self::HAS_MANY, 'RequestShipping', 'user_id'),
+        );
+    }
 
-	/**
-	 * @return array validation rules for model attributes.
-	 */
-	public function rules()
-	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
-		return array(
-			array('login, password', 'required'),
-			array('status', 'numerical', 'integerOnly'=>true),
-			array('login', 'length', 'max'=>50),
-			array('email, skype', 'length', 'max'=>256),
-			array('phone', 'length', 'max'=>15),
-			array('rating', 'length', 'max'=>3),
-			array('contact_fio, organization_name', 'safe'),
-			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
-			array('id, login, password, status, email, skype, phone, contact_fio, organization_name, rating', 'safe', 'on'=>'search'),
-		);
-	}
+    public function defaultScope()
+    {
+        return array(
+            'condition'=> "`confirm`!=0"
+        );
+    }
 
-	/**
-	 * @return array relational rules.
-	 */
-	public function relations()
-	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
-		return array(
-			'requestShippings' => array(self::HAS_MANY, 'RequestShipping', 'user_id'),
-		);
-	}
+    public function getUsersModel($id = null){
+        $this->Model = ($id)? Users::model()->findByPk((int)$id) :  new Users;
+        return $this->Model;
+    }
 
-	/**
-	 * @return array customized attribute labels (name=>label)
-	 */
-	public function attributeLabels()
-	{
-		return array(
-			'id' => 'ID',
-			'login' => 'Login',
-			'password' => 'Password',
-			'status' => 'Status',
-			'email' => 'Email',
-			'skype' => 'Skype',
-			'phone' => 'Phone',
-			'contact_fio' => 'Contact Fio',
-			'organization_name' => 'Organization Name',
-			'rating' => 'Rating',
-		);
-	}
+    public static function saveUser($post){        //Сохранение пользователей
 
-	/**
-	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
-	 */
-	public function search()
-	{
-		// Warning: Please modify the following code to remove attributes that
-		// should not be searched.
+        $url = 'http://192.168.0.224:9994/json/reply/SignUpRequestV1';
+        $params = array(
+            'Phone' =>  AccessoryFunctions::clearTel($post['login']),
+            'Password' => $post['password'],
+            'Name' => $post['name'],
+            'Occupation' => 3,
+            'Company' => $post['company'],
+            'Email' => $post['email'],
+            'Skype' => $post['skype']
+        );
+        $result = file_get_contents($url, false, stream_context_create(array(
+            'http' => array(
+                'method'  => 'POST',
+                'header'  => 'Content-type: application/x-www-form-urlencoded',
+                'content' => http_build_query($params)
+            )
+        )));
+        $date = json_decode($result);
+        return $date->Status;
+    }
 
-		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
-		$criteria->compare('login',$this->login,true);
-		$criteria->compare('password',$this->password,true);
-		$criteria->compare('status',$this->status);
-		$criteria->compare('email',$this->email,true);
-		$criteria->compare('skype',$this->skype,true);
-		$criteria->compare('phone',$this->phone,true);
-		$criteria->compare('contact_fio',$this->contact_fio,true);
-		$criteria->compare('organization_name',$this->organization_name,true);
-		$criteria->compare('rating',$this->rating,true);
 
-		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
-		));
-	}
+  /* public function saveParams(){
+        $this->oldPassword = $this->Model->password;
+        $this->Model->attributes = $this->data;
+      //  $this->Model->mobile_version = 0;
+        $this->Model->company = iconv("UTF-8","windows-1251",$this->data['company']);
+        $this->Model->name = iconv("UTF-8","windows-1251",$this->data['name']);
+        $this->Model->skype = iconv("UTF-8","windows-1251",$this->data['skype']);
+      //  $this->Model->mobile_platform = 0;
+        $this->Model->login = AccessoryFunctions::clearTel($this->data['login']);
+        if(strlen($this->data['password'])>0)  $this->Model->password = md5($this->data['password']);
+        else $this->Model->password = $this->oldPassword;
+    }*/
+
+  /*  public function saveUser(){
+       // $this->Model->saveParams();
+        return $this->SignUpRequest();
+       // return ($this->Model->save())?true:false;
+    }*/
+
+    public static function getAllByCriteria($table,$criteria = null){
+        $criteria = $criteria?$criteria:new CDbCriteria;
+        return CActiveRecord::model($table)->findAll($criteria);
+    }
+
+    public static function checkDoubleLogin($login){
+        return Users::model()->resetScope()->count("login=:login",array(":login"=>AccessoryFunctions::clearTel($login)));
+    }
+
+    public static function checkDoubleEmail($email){
+        return Users::model()->resetScope()->count("email=:email",array(":email"=>$email));
+    }
+
 }

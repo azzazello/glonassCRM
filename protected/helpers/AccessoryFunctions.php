@@ -11,7 +11,7 @@ class AccessoryFunctions extends  CHtml
 
 
     public static function clearTel($tel) {
-        return ereg_replace("[+ ()-]","",$tel);
+        return ereg_replace("[ ()-]","",$tel);
     }
 
     public static function replaceText($text){
@@ -70,6 +70,10 @@ class AccessoryFunctions extends  CHtml
 
     }
 
+    public static function emailValidation($email) {
+        $regexp="/^[a-zA-Z0-9_\-.]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-.]+$/";
+        return !preg_match($regexp, $email)?false:true;
+    }
 
     public static function save($val){
         switch ($val){
