@@ -9,14 +9,15 @@
  * Columns in table "reply_shipping" available as properties of the model,
  * followed by relations of table "reply_shipping" available as properties of the model.
  *
- * @property integer $id
+ * @property string $id
  * @property integer $user_id
- * @property string $plate
- * @property string $date_create
- * @property integer $max_load
  * @property integer $request_id
+ * @property string $date_create
+ * @property integer $trucks_count
+ * @property string $price
+ * @property integer $confirm
  *
- * @property Truck $plate0
+ * @property Users $user
  * @property RequestShipping $request
  */
 abstract class BaseReplyShipping extends GxActiveRecord {
@@ -39,17 +40,17 @@ abstract class BaseReplyShipping extends GxActiveRecord {
 
 	public function rules() {
 		return array(
-			array('id, user_id, plate, date_create, max_load', 'required'),
-			array('id, user_id, max_load, request_id', 'numerical', 'integerOnly'=>true),
-			array('plate', 'length', 'max'=>15),
-			array('request_id', 'default', 'setOnEmpty' => true, 'value' => null),
-			array('id, user_id, plate, date_create, max_load, request_id', 'safe', 'on'=>'search'),
+			array('user_id, date_create, price', 'required'),
+			array('user_id, request_id, trucks_count, confirm', 'numerical', 'integerOnly'=>true),
+			array('price', 'length', 'max'=>10),
+			array('request_id, trucks_count, confirm', 'default', 'setOnEmpty' => true, 'value' => null),
+			array('id, user_id, request_id, date_create, trucks_count, price, confirm', 'safe', 'on'=>'search'),
 		);
 	}
 
 	public function relations() {
 		return array(
-			'plate0' => array(self::BELONGS_TO, 'Truck', 'plate'),
+			'user' => array(self::BELONGS_TO, 'Users', 'user_id'),
 			'request' => array(self::BELONGS_TO, 'RequestShipping', 'request_id'),
 		);
 	}
@@ -62,12 +63,13 @@ abstract class BaseReplyShipping extends GxActiveRecord {
 	public function attributeLabels() {
 		return array(
 			'id' => Yii::t('app', 'ID'),
-			'user_id' => Yii::t('app', 'User'),
-			'plate' => null,
-			'date_create' => Yii::t('app', 'Date Create'),
-			'max_load' => Yii::t('app', 'Max Load'),
+			'user_id' => null,
 			'request_id' => null,
-			'plate0' => null,
+			'date_create' => Yii::t('app', 'Date Create'),
+			'trucks_count' => Yii::t('app', 'Trucks Count'),
+			'price' => Yii::t('app', 'Price'),
+			'confirm' => Yii::t('app', 'Confirm'),
+			'user' => null,
 			'request' => null,
 		);
 	}
@@ -75,12 +77,13 @@ abstract class BaseReplyShipping extends GxActiveRecord {
 	public function search() {
 		$criteria = new CDbCriteria;
 
-		$criteria->compare('id', $this->id);
+		$criteria->compare('id', $this->id, true);
 		$criteria->compare('user_id', $this->user_id);
-		$criteria->compare('plate', $this->plate);
-		$criteria->compare('date_create', $this->date_create, true);
-		$criteria->compare('max_load', $this->max_load);
 		$criteria->compare('request_id', $this->request_id);
+		$criteria->compare('date_create', $this->date_create, true);
+		$criteria->compare('trucks_count', $this->trucks_count);
+		$criteria->compare('price', $this->price, true);
+		$criteria->compare('confirm', $this->confirm);
 
 		return new CActiveDataProvider($this, array(
 			'criteria' => $criteria,

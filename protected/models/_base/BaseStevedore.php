@@ -12,8 +12,10 @@
  * @property integer $id
  * @property string $name
  * @property string $address
+ * @property integer $regionUnloadId
  *
  * @property RequestShipping[] $requestShippings
+ * @property RegionUnload $regionUnload
  */
 abstract class BaseStevedore extends GxActiveRecord {
 
@@ -35,14 +37,16 @@ abstract class BaseStevedore extends GxActiveRecord {
 
 	public function rules() {
 		return array(
-			array('name, address', 'required'),
-			array('id, name, address', 'safe', 'on'=>'search'),
+			array('name, address, regionUnloadId', 'required'),
+			array('regionUnloadId', 'numerical', 'integerOnly'=>true),
+			array('id, name, address, regionUnloadId', 'safe', 'on'=>'search'),
 		);
 	}
 
 	public function relations() {
 		return array(
 			'requestShippings' => array(self::HAS_MANY, 'RequestShipping', 'stividor_id'),
+			'regionUnload' => array(self::BELONGS_TO, 'RegionUnload', 'regionUnloadId'),
 		);
 	}
 
@@ -56,7 +60,9 @@ abstract class BaseStevedore extends GxActiveRecord {
 			'id' => Yii::t('app', 'ID'),
 			'name' => Yii::t('app', 'Name'),
 			'address' => Yii::t('app', 'Address'),
+			'regionUnloadId' => null,
 			'requestShippings' => null,
+			'regionUnload' => null,
 		);
 	}
 
@@ -66,6 +72,7 @@ abstract class BaseStevedore extends GxActiveRecord {
 		$criteria->compare('id', $this->id);
 		$criteria->compare('name', $this->name, true);
 		$criteria->compare('address', $this->address, true);
+		$criteria->compare('regionUnloadId', $this->regionUnloadId);
 
 		return new CActiveDataProvider($this, array(
 			'criteria' => $criteria,

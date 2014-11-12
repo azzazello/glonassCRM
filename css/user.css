@@ -1,0 +1,14 @@
+a.greenA {color: #178015 !important;}
+
+.colabrators td{padding: 10px}
+.colabrators table {border: 1px solid #000000}
+.colabrators td{border:  1px solid #000000}
+
+.colabrators thead tr td{font-weight: bold}
+
+.colabrators tbody  tr:nth-child(even) {background-color: #ffffff }
+.colabrators tbody  tr:nth-child(odd) {background-color: rgba(245, 222, 177, 0.49)}
+table.colabrators {border: 1px solid rgba(0, 0, 0, 0.26)}
+
+.priceDown {font-weight: bold; color: green}
+.priceUp {font-weight: bold; color: red}
