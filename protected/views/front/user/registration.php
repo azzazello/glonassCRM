@@ -81,7 +81,7 @@
                     <div class="col-sm-6">
                         <div class="input-group mb15">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-check"></i></span>
-                            <input type="text" class="form-control" value="Порт-Транзит" name="company" placeholder="Название организации">
+                            <input type="text" class="form-control" value="" name="company" placeholder="Название организации">
                         </div><!-- input-group -->
                             <div class="error_registration company_error"></div>
                     </div>

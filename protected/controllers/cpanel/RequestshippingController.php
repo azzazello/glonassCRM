@@ -1,6 +1,6 @@
 <?php
 
-class RequestshippingController extends Controller
+class RequestshippingController extends ControlerCPanel
 {
     public $errorSave = array(
         1=>"Ќеверно указана дата начала погрузки",

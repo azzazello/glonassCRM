@@ -41,7 +41,6 @@ class MYChtml extends  CHtml
 	 	 return $arg;
 	 }
 
-
     public static function filter ($val) {
         return  trim(str_replace(array("\t","\\t","\\n","\\r","\n","\r","\\", "/", ";", ":", "'", "\"","(",")"),"",$val));
     }
@@ -62,23 +61,22 @@ class MYChtml extends  CHtml
 	 $arg=str_replace ('X','х',$arg);
 	 
 	 return $arg;
+	 
+	 //return mb_strtoupper($arg);
 	}
 
+	/*public static function showMessage($content) {
+        if (strlen($content)>0) return '<script type="text/javascript"> bootbox.alert("'.$content.'");</script>';
+    }*/
 
     public static function bootboxAlert($v){
         switch ($v){
             case 'recovery': return 'Ссылка восстановления пароля не верна, пройдите процедуру восстановления еще раз'; break;
             case 'registrationOk': return 'Регистрация прошла успешно'; break;
-            case 'ok': return 'Сохранено успешно'; break;
         }
     }
 
-    public static function view_date($val){
-        return AccessoryFunctions::showDate($val);
-    }
-
-
-        public static function showMessage($get){
+    public static function showMessage($get){
         if(empty($get)) return false;
         $test = false;
         foreach($get as $k=>$v){
@@ -91,6 +89,51 @@ class MYChtml extends  CHtml
     }
 
 
+<<<<<<< HEAD
+=======
+
+        $a= array();
+        foreach($model as $item){
+            if(!in_array($item->Operation->name,$a)) array_push($a,$item->Operation->name);
+        }
+
+        return self::getArrayOptions($a);
+    }
+
+    public function getRolesGoods($id){
+        $model = Goodsforoperator::model()->findAll('`typeUserId`='.(int)$id);
+        $str = '';
+        $i = 0;
+        foreach($model as $item){
+            if($item->goods->delete == 1) {  $i++; continue;}
+            $str.=$item->goods->name;
+            $i++;
+            if($i!=count($model)) $str.=", ";
+        }
+        return $str;
+    }
+
+    public static function Buttons($id){
+//        <a href="#" id="blo'.$id.'" style="margin-left:10px; " class="block"><img width="24" src='.Yii::app()->request->baseUrl.'/img/arroy.png></a>
+        return
+        '<a href="#" id="del'.$id.'" title="Удалить" style="margin-left:25px;" class="delete"><img width="20" src='.Yii::app()->request->baseUrl.'/img/remove.png></a>';
+    }
+
+    public static function editAndDeleteButtons($id){
+        return
+        '<a href="#" id="del'.$id.'" title="Удалить" style="margin-left:10px; float:right;"  title="Удалить" class="delete"><img width="20" src='.Yii::app()->request->baseUrl.'/img/remove.png></a>
+        <a href="#" id="blo'.$id.'" style="margin-left:10px;" title="Редактировать" class="block"><img width="21" src='.Yii::app()->request->baseUrl.'/img/edit.png></a>';
+    }
+
+    public static function editButtons($id){
+        return '<a href="#" id="blo'.$id.'" style="margin-left:40px;" title="Редактировать" class="block"><img width="21" src='.Yii::app()->request->baseUrl.'/img/edit.png></a>';
+    }
+    public static function deleteButton($id){
+        return '<a href="#" id="del'.$id.'" title="Удалить" style="margin-left:25px;"  title="Удалить" class="delete"><img width="20" src='.Yii::app()->request->baseUrl.'/img/remove.png></a>';
+    }
+    public static function passport($id){
+        return '<a href="#" style="margin-left:15px;" title="" class="view"><img width="25" src='.Yii::app()->request->baseUrl.'/img/passpotr.png></a>';
+    }
     public  static function toUTF8($str){
         return iconv("windows-1251", "utf-8",$str);
     }
@@ -101,7 +144,7 @@ class MYChtml extends  CHtml
 
     public static function  toArrayAndToUtf8($model,$keys)
     {   $array = array();
-        foreach($model as $key=>$val){
+        foreach($model as $key=>$val) {
             foreach ($keys as $k=>$v)
             {
              $array_temp[$k] = self::toUTF8($val->$v);
@@ -125,4 +168,5 @@ class MYChtml extends  CHtml
         '.$msg.'
         </div>';
     }
+>>>>>>> 87dab63b9be1f0b57328840c19c17ce8012f73ab
 }

@@ -9,7 +9,7 @@ class Users extends BaseUsers
 
     public $post;
     public $model;
-    public $oldPassword;
+    public $oldpassword = false;
 
 	public static function model($className=__CLASS__) {
 		return parent::model($className);
@@ -36,47 +36,9 @@ class Users extends BaseUsers
 
     public static function saveUser($post){        //Ñîõğàíåíèå ïîëüçîâàòåëåé
 
-        $url = 'http://192.168.0.224:9994/json/reply/SignUpRequestV1';
-        $params = array(
-            'Phone' =>  AccessoryFunctions::clearTel($post['login']),
-            'Password' => $post['password'],
-            'Name' => $post['name'],
-            'Occupation' => 3,
-            'Company' => $post['company'],
-            'Email' => $post['email'],
-            'Skype' => $post['skype']
-        );
-        $result = file_get_contents($url, false, stream_context_create(array(
-            'http' => array(
-                'method'  => 'POST',
-                'header'  => 'Content-type: application/x-www-form-urlencoded',
-                'content' => http_build_query($params)
-            )
-        )));
-        $date = json_decode($result);
-        return $date->Status;
+        return Forwebservices::SignUpRequestV1($post);
+
     }
-
-
-
-  /* public function saveParams(){
-        $this->oldPassword = $this->Model->password;
-        $this->Model->attributes = $this->data;
-      //  $this->Model->mobile_version = 0;
-        $this->Model->company = iconv("UTF-8","windows-1251",$this->data['company']);
-        $this->Model->name = iconv("UTF-8","windows-1251",$this->data['name']);
-        $this->Model->skype = iconv("UTF-8","windows-1251",$this->data['skype']);
-      //  $this->Model->mobile_platform = 0;
-        $this->Model->login = AccessoryFunctions::clearTel($this->data['login']);
-        if(strlen($this->data['password'])>0)  $this->Model->password = md5($this->data['password']);
-        else $this->Model->password = $this->oldPassword;
-    }*/
-
-  /*  public function saveUser(){
-       // $this->Model->saveParams();
-        return $this->SignUpRequest();
-       // return ($this->Model->save())?true:false;
-    }*/
 
     public static function getAllByCriteria($table,$criteria = null){
         $criteria = $criteria?$criteria:new CDbCriteria;
@@ -89,6 +51,17 @@ class Users extends BaseUsers
 
     public static function checkDoubleEmail($email){
         return Users::model()->resetScope()->count("email=:email",array(":email"=>$email));
+    }
+
+    public static  function getCurrUser(){
+        return 1;
+    }
+
+    public function editProfile(){
+        $this->Model->attributes = $this->data;
+        $this->Model->password = !$this->oldpassword? md5($this->data['password']) : $this->oldpassword;
+        $this->Model->login = AccessoryFunctions::clearTel( $this->data['login'] );
+        return $this->Model->save();
     }
 
 }

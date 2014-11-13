@@ -8,7 +8,7 @@
  */
 class ControlerCPanel extends CController
 {
-    public $layout='//layouts/cabinet';
+    public $layout='//layouts/main';
 
     public function filters()
     {
@@ -19,7 +19,7 @@ class ControlerCPanel extends CController
 
     public  function  filterCheckAccess($filterChain) {
         if (Yii::app()->user->isGuest) {
-            $this->redirect($this->createUrl("/login"));
+            $this->redirect($this->createUrl( "../login" ));
         }
 
         $filterChain->run();

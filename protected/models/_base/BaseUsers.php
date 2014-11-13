@@ -48,9 +48,7 @@ abstract class BaseUsers extends GxActiveRecord {
 
     public function rules(){
         return array(
-
-
-            array('login, password,email,name', 'required'),
+            array('login, password, name', 'required'),
             array('admin, activ, isProvider, role, confirm', 'numerical', 'integerOnly'=>true),
             array('login', 'length', 'max'=>50),
             array('password, name, generate, company, email, skype', 'length', 'max'=>255),
@@ -58,7 +56,6 @@ abstract class BaseUsers extends GxActiveRecord {
             array('mobile_version', 'length', 'max'=>10),
             array('mobile_platform', 'length', 'max'=>1),
             array('last_in', 'safe'),
-
             array('login, password, last_in, name, admin, activ, generate, isProvider, role, confirm, mobile_token, mobile_version, mobile_platform, company, email, skype', 'default', 'setOnEmpty' => true, 'value' => null),
             array('id, login, password, last_in, name, admin, activ, generate, isProvider, role, confirm, mobile_token, mobile_version, mobile_platform, company, email, skype', 'safe', 'on'=>'search'),
         );

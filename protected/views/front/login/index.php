@@ -35,7 +35,7 @@
                     <div class="col-sm-6">
                         <div class="input-group mb15">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                            <input type="text" class="form-control" value="mike.anapa@gmail.com" name="" id="forgotEmail" placeholder="¬ведите Email дл€ восстановлени€ парол€ *">
+                            <input type="text" class="form-control" value="" name="" id="forgotEmail" placeholder="¬ведите Email дл€ восстановлени€ парол€ *">
 
 
                         </div>

@@ -8,8 +8,13 @@ class LoginController extends Controller
         public $repeat = true;
         public $title = 'Вход';
 
+        public function inCabinet(){
+            $this->redirect($this->createUrl('/cpanel/'));
+        }
+
         public function actionIndex()
         {
+            if (!Yii::app()->user->isGuest) $this->inCabinet();
 
             $model = new LoginForm;
 
@@ -18,7 +23,7 @@ class LoginController extends Controller
 
                 $valid = $model->validate();
                 if ($valid && $model->authenticate()){
-                    $this->redirect($this->createUrl('/cabinet'));
+                   $this->inCabinet();
                 }
                 $this->message = 'Не верный логин или пароль';
             }

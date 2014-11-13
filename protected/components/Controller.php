@@ -27,7 +27,7 @@ class Controller extends CController
         $this->renderPartial($this->false); die;
     }
     public function ajaxMessages($str){
-        echo iconv("windows-1251","UTF-8",$str);
+        echo MYChtml::toUTF8($str);
         die;
     }
 }

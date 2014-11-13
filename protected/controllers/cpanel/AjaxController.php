@@ -1,6 +1,6 @@
 <?php
 
-class AjaxController extends Controller
+class AjaxController extends ControlerCPanel
 {
 	public function actionIndex()
 	{

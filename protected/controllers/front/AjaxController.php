@@ -50,7 +50,7 @@ class AjaxController extends Controller
         $parse_str = array();
         parse_str($_POST['post'],$parse_str);
         foreach($parse_str as $k=>$v){
-            $this->post[$k] = iconv("UTF-8","windows-1251",$v);
+            $this->post[$k] = MYChtml::fromUTF8($v);// iconv("UTF-8","windows-1251",$v);
         }
         if(Users::checkDoubleLogin($this->post['login'])) $this->ajaxMessages('dphone');
         if(Users::checkDoubleEmail($this->post['email'])) $this->ajaxMessages('demail');
@@ -60,34 +60,14 @@ class AjaxController extends Controller
     }
 
     public function actionconfirmAccount(){     //Подтверждение регистрации
-        $url = 'http://192.168.0.224:9994/json/reply/ActivateAccountRequest';
-        $params = array(
-            'Phone' => AccessoryFunctions::clearTel($_POST['phone']),
-            'Code' => $_POST['code']
-        );
-        $result = file_get_contents($url, false, stream_context_create(array(
-            'http' => array(
-                'method'  => 'POST',
-                'header'  => 'Content-type: application/x-www-form-urlencoded',
-                'content' => http_build_query($params)
-            )
-        )));
-        echo $result;
+
+        echo Forwebservices::confirmAccount($_POST['phone'],$_POST['code']);
+
     }
 
-    public function  actionSendCodeRequest(){
-            $url = 'http://192.168.0.224:9994/json/reply/SendCodeRequest';
-            $params = array(
-                'Phone' => AccessoryFunctions::clearTel($_POST['phone'])
-            );
-            $result = file_get_contents($url, false, stream_context_create(array(
-                'http' => array(
-                    'method'  => 'POST',
-                    'header'  => 'Content-type: application/x-www-form-urlencoded',
-                    'content' => http_build_query($params)
-                )
-            )));
-        echo $result;
+    public function  actionSendCodeRequest(){   //Повторная отправка кода
+        echo Forwebservices::newRequestShipping($_POST['phone']);
+
     }
 
 }
