@@ -7,7 +7,7 @@
  * property or method in class "Users".
  *
  * Columns in table "users" available as properties of the model,
- * followed by relations of table "users" available as properties of the model.
+ * and there are no model relations.
  *
  * @property integer $id
  * @property string $login
@@ -27,8 +27,6 @@
  * @property string $email
  * @property string $skype
  *
- * @property OperationWithRequests[] $operationWithRequests
- * @property ReplyShipping[] $replyShippings
  */
 abstract class BaseUsers extends GxActiveRecord {
 
@@ -48,24 +46,23 @@ abstract class BaseUsers extends GxActiveRecord {
 		return 'login';
 	}
 
-	public function rules() {
-		return array(
-			array('admin, activ, isProvider, role, confirm', 'numerical', 'integerOnly'=>true),
-			array('login', 'length', 'max'=>50),
-			array('password, name, generate, company, email, skype', 'length', 'max'=>255),
-			array('mobile_token', 'length', 'max'=>30),
-			array('mobile_version', 'length', 'max'=>10),
-			array('mobile_platform', 'length', 'max'=>1),
-			array('last_in', 'safe'),
-			array('login, password, last_in, name, admin, activ, generate, isProvider, role, confirm, mobile_token, mobile_version, mobile_platform, company, email, skype', 'default', 'setOnEmpty' => true, 'value' => null),
-			array('id, login, password, last_in, name, admin, activ, generate, isProvider, role, confirm, mobile_token, mobile_version, mobile_platform, company, email, skype', 'safe', 'on'=>'search'),
-		);
-	}
+    public function rules(){
+        return array(
+            array('login, password, name', 'required'),
+            array('admin, activ, isProvider, role, confirm', 'numerical', 'integerOnly'=>true),
+            array('login', 'length', 'max'=>50),
+            array('password, name, generate, company, email, skype', 'length', 'max'=>255),
+            array('mobile_token', 'length', 'max'=>30),
+            array('mobile_version', 'length', 'max'=>10),
+            array('mobile_platform', 'length', 'max'=>1),
+            array('last_in', 'safe'),
+            array('login, password, last_in, name, admin, activ, generate, isProvider, role, confirm, mobile_token, mobile_version, mobile_platform, company, email, skype', 'default', 'setOnEmpty' => true, 'value' => null),
+            array('id, login, password, last_in, name, admin, activ, generate, isProvider, role, confirm, mobile_token, mobile_version, mobile_platform, company, email, skype', 'safe', 'on'=>'search'),
+        );
+    }
 
 	public function relations() {
 		return array(
-			'operationWithRequests' => array(self::HAS_MANY, 'OperationWithRequests', 'userId'),
-			'replyShippings' => array(self::HAS_MANY, 'ReplyShipping', 'user_id'),
 		);
 	}
 
@@ -77,10 +74,10 @@ abstract class BaseUsers extends GxActiveRecord {
 	public function attributeLabels() {
 		return array(
 			'id' => Yii::t('app', 'ID'),
-			'login' => Yii::t('app', 'Login'),
-			'password' => Yii::t('app', 'Password'),
+			'login' => Yii::t('app', 'Логин'),
+			'password' => Yii::t('app', 'Пароль'),
 			'last_in' => Yii::t('app', 'Last In'),
-			'name' => Yii::t('app', 'Name'),
+			'name' => Yii::t('app', 'ФИО'),
 			'admin' => Yii::t('app', 'Admin'),
 			'activ' => Yii::t('app', 'Activ'),
 			'generate' => Yii::t('app', 'Generate'),
@@ -90,11 +87,9 @@ abstract class BaseUsers extends GxActiveRecord {
 			'mobile_token' => Yii::t('app', 'Mobile Token'),
 			'mobile_version' => Yii::t('app', 'Mobile Version'),
 			'mobile_platform' => Yii::t('app', 'Mobile Platform'),
-			'company' => Yii::t('app', 'Company'),
+			'company' => Yii::t('app', 'Название организации'),
 			'email' => Yii::t('app', 'Email'),
 			'skype' => Yii::t('app', 'Skype'),
-			'operationWithRequests' => null,
-			'replyShippings' => null,
 		);
 	}
 

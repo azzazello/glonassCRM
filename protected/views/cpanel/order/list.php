@@ -136,7 +136,7 @@
                     if (data == "true") {
 
                         $("#iidr"+idRequest+" .unconfirmReply").append($("#reply"+id));
-                        $("#reply"+id+" .unconfirm img").attr("src","<?=Yii::app()->request->baseUrl;?>/images/icons/right.png")
+                        $("#reply"+id+" .unconfirm img").attr("src","<?=Yii::app()->request->baseUrl;?>/images/icons/right.png");
                         $("#reply"+id+" .confirm").addClass("confirm");
                         $("#reply"+id+" .confirm").removeClass("unconfirm");
                     } else

@@ -8,7 +8,7 @@ Yii::setPathOfAlias('local',dirname(__FILE__).DIRECTORY_SEPARATOR);
 // CWebApplication properties can be configured here.
 return array(
     'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-    'name'=>'Портал недвижимости юга России',
+    'name'=>'Main ',
 
     // preloading 'log' component
     'preload'=>array('log'),
@@ -17,7 +17,7 @@ return array(
     'sourceLanguage'=>'ru',
     'language'=>'ru',
 
-    'defaultController' => 'site',
+    'defaultController' => 'main',
 
     // autoloading model and component classes
     'import'=>array(
@@ -25,8 +25,8 @@ return array(
         'application.components.*',
         'application.helpers.*',
         'ext.giix-components.*',
-        'application.modules.user.models.*',
-        'application.modules.user.components.*',
+       /* 'application.modules.user.models.*',
+        'application.modules.user.components.*',*/
     ),
 
     /*'controllerMap'=>array(
@@ -46,7 +46,7 @@ return array(
             // 'newDirMode'=>0777,
         ),
 
-        'user'=>array(
+       /* 'user'=>array(
             # encrypting method (php hash function)
             'hash' => 'md5',
 
@@ -75,8 +75,8 @@ return array(
             'returnUrl' => array('/user/profile'),
 
             # page after logout
-            'returnLogoutUrl' => array('/user/login'),
-        ),
+            'returnLogoutUrl' => array('/'),
+        ),*/
 
     ),
 
@@ -88,16 +88,16 @@ return array(
     // application components
     'components'=>array(
 
-        'image'=>array(
+        /*'image'=>array(
             'class'=>'application.extensions.image.CImageComponent',
             'driver'=>'GD',
-        ),
+        ),*/
 
         'user'=>array(
             // enable cookie-based authentication
-            'class' => 'WebUser',
+          //  'class' => 'WebUser',
             'allowAutoLogin'=>true,
-            'loginUrl' => array('/user/login'),
+          //  'loginUrl' => array('/user/login'),
         ),
         // uncomment the following to enable URLs in path-format
 
@@ -116,12 +116,23 @@ return array(
         ),
 
         'db'=>array(
-            'connectionString' => 'mysql:host=localhost;dbname=zernovoz',
+            'connectionString' => 'mysql:host=192.168.0.89;dbname=zernovoz',
+            //'connectionString' => 'mysql:host=192.168.0.224;dbname=glonass',
             'emulatePrepare' => true,
+           // 'username' => 'misha',
             'username' => 'root',
             'password' => '1111',
             'charset' => 'cp1251',
         ),
+
+        'igor'=>array(
+            'class' => 'system.db.CDBConnection',
+            'connectionString' => 'mysql:host=192.168.0.89;dbname=zernovoz',
+            'emulatePrepare' => true,
+            'username' => 'root',
+            'password' => '1111',
+            'charset' => 'cp1251',
+        )
 
     ),
 
@@ -135,12 +146,12 @@ return array(
             "debug" => 1, //отображение информации дебаггера (0 - нет вообще)
             "auth" => true, //сервер требует авторизации
             "port" => 25, //порт (по-умолчанию - 25)
-            "username" => "portal-uga.ru+no-reply", //имя пользователя на сервере
-            "password" => "111fd11fsd11", //пароль
-            "addreply" => "no-reply@portal-uga.ru", //ваш е-mail
+            "username" => "robot@bp-sever.ru", //имя пользователя на сервере
+            "password" => "Hj,,fn", //пароль
+            "addreply" => "robot@bp-sever.ru", //ваш е-mail
             "replyto" => "", //e-mail ответа
-            "fromname" => "Портал Юга", //имя
-            "from" => "no-reply@portal-uga.ru", //от кого
+            "fromname" => "Письмо с сайта", //имя
+            "from" => "robot@bp-sever.ru", //от кого info@osb-plywood.ru
             "charset" => "UTF-8", //от кого
         )
     )

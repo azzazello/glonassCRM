@@ -112,6 +112,14 @@ a:focus {
     margin-top: 5px;
     float: left;
 }
+.email_error_validation{
+    color: #ab1313;
+    font-size: 12px;
+    margin-bottom: 5px;
+    margin-top: -1px;
+    text-align: center;
+}
+
 
 .headerwrapper .header-left .menu-collapse {
     -moz-transition: all 0.2s ease-out 0s;
@@ -2997,9 +3005,15 @@ body.signin {
 .panel-signin {
     width: 400px;
 }
-
-.panel-signup {
-    width: 600px;
+.error_registration {
+    font-size: 12px;
+    color: #AB1313;
+    text-align: center;
+    margin-top: -10px;
+    margin-bottom: 5px;
+}
+.panel-signup{
+    width: 500px;
 }
 
 .panel-signin .panel-body,

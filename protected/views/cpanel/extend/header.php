@@ -133,12 +133,12 @@
                         <i class="fa fa-caret-down"></i>
                     </button>
                     <ul class="dropdown-menu pull-right" role="menu">
-                        <li><a href="#"><i class="glyphicon glyphicon-user"></i> Мой профиль</a></li>
+                        <li><a href="<?=$this->createUrl("/profile");?>"><i class="glyphicon glyphicon-user"></i> Мой профиль</a></li>
                         <li><a href="#"><i class="glyphicon glyphicon-star"></i> Настройки</a></li>
                         <li><a href="#"><i class="glyphicon glyphicon-cog"></i> Финансы</a></li>
-                        <li><a href="#"><i class="glyphicon glyphicon-question-sign"></i>Сайт</a></li>
+                        <li><a href="<?=$this->createUrl("../");?>"><i class="glyphicon glyphicon-question-sign"></i>Сайт</a></li>
                         <li class="divider"></li>
-                        <li><a href="#"><i class="glyphicon glyphicon-log-out"></i>Выход</a></li>
+                        <li><a href="<?=$this->createUrl("./login/exit");?>"><i class="glyphicon glyphicon-log-out"></i>Выход</a></li>
                     </ul>
                 </div><!-- btn-group -->
 

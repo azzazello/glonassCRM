@@ -13,9 +13,11 @@
  * @property string $description
  * @property string $rating
  * @property integer $user_id_create
- * @property integer $type_user_create
+ * @property integer $user_type_create
  * @property integer $user_id_for
  * @property integer $user_type_for
+ * @property string $date_create
+ * @property integer $delete
  *
  */
 abstract class BaseRating extends GxActiveRecord {
@@ -39,10 +41,11 @@ abstract class BaseRating extends GxActiveRecord {
 	public function rules() {
 		return array(
 			array('description, rating, user_id_create, user_id_for, user_type_for', 'required'),
-			array('user_id_create, type_user_create, user_id_for, user_type_for', 'numerical', 'integerOnly'=>true),
+			array('user_id_create, user_type_create, user_id_for, user_type_for, delete', 'numerical', 'integerOnly'=>true),
 			array('rating', 'length', 'max'=>3),
-			array('type_user_create', 'default', 'setOnEmpty' => true, 'value' => null),
-			array('id, description, rating, user_id_create, type_user_create, user_id_for, user_type_for', 'safe', 'on'=>'search'),
+			array('date_create', 'safe'),
+			array('user_type_create, date_create, delete', 'default', 'setOnEmpty' => true, 'value' => null),
+			array('id, description, rating, user_id_create, user_type_create, user_id_for, user_type_for, date_create, delete', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -62,9 +65,11 @@ abstract class BaseRating extends GxActiveRecord {
 			'description' => Yii::t('app', 'Description'),
 			'rating' => Yii::t('app', 'Rating'),
 			'user_id_create' => Yii::t('app', 'User Id Create'),
-			'type_user_create' => Yii::t('app', 'Type User Create'),
+			'user_type_create' => Yii::t('app', 'User Type Create'),
 			'user_id_for' => Yii::t('app', 'User Id For'),
 			'user_type_for' => Yii::t('app', 'User Type For'),
+			'date_create' => Yii::t('app', 'Date Create'),
+			'delete' => Yii::t('app', 'Delete'),
 		);
 	}
 
@@ -75,9 +80,11 @@ abstract class BaseRating extends GxActiveRecord {
 		$criteria->compare('description', $this->description, true);
 		$criteria->compare('rating', $this->rating, true);
 		$criteria->compare('user_id_create', $this->user_id_create);
-		$criteria->compare('type_user_create', $this->type_user_create);
+		$criteria->compare('user_type_create', $this->user_type_create);
 		$criteria->compare('user_id_for', $this->user_id_for);
 		$criteria->compare('user_type_for', $this->user_type_for);
+		$criteria->compare('date_create', $this->date_create, true);
+		$criteria->compare('delete', $this->delete);
 
 		return new CActiveDataProvider($this, array(
 			'criteria' => $criteria,
