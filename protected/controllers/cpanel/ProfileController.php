@@ -15,12 +15,10 @@ class  ProfileController extends ControlerCPanel
     public function actionIndex()
     {
         $this->getModel( Yii::app()->user->getId() );
-        if(Yii::app()->request->isPostRequest) {
-            $this->oldModel = $this->model;
-            if(!$this->saveUser()) $this->model = $this->oldModel;
+        if(Yii::app()->request->isPostRequest){
+            $this->saveUser();
         }
         $this->render('index',array('errors'=>$this->model->getErrors()));
-
     }
 
     public function getModel($id = null){

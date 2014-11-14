@@ -22,7 +22,7 @@ class AjaxController extends Controller
     }
 
     public function actionAjaxCheckEmail(){ //Проверка дубляжа email
-            echo Users::checkDoubleEmail($_POST['email']);
+            echo Users::checkDoubleEmail($_POST['email'],$_POST['edit']);
     }
 
     public function actionSendEmail(){  //Отправка письма восстановления пароля

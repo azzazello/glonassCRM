@@ -49,8 +49,12 @@ class Users extends BaseUsers
         return Users::model()->resetScope()->count("login=:login",array(":login"=>AccessoryFunctions::clearTel($login)));
     }
 
-    public static function checkDoubleEmail($email){
-        return Users::model()->resetScope()->count("email=:email",array(":email"=>$email));
+    public static function checkDoubleEmail($email,$edit = 0){
+        $criteria = new CDbCriteria;
+        $criteria->condition = "email=:email";
+        if((int)$edit) $criteria->addCondition("id!=".Yii::app()->user->getId());
+        $criteria->params = array(":email"=>$email);
+        return Users::model()->resetScope()->count($criteria);
     }
 
     public static  function getCurrUser(){

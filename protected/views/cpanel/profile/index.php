@@ -32,8 +32,8 @@
                     <div class="form-group">
                         <label class="col-sm-4 control-label">‘»Œ</label>
                         <div class="col-sm-8">
-                            <input name="name" class="form-control" value="<?=$this->model->name;?>">
-                            <div class="error_edit"><?=$errors['name'][0];?></div>
+                            <input name="name" id="name" class="form-control" value="<?=$this->model->name;?>">
+                            <div class="error_edit error_name"><?=$errors['name'][0];?></div>
                         </div>
 
                     </div>
@@ -41,7 +41,7 @@
                         <label class="col-sm-4 control-label">ÀÓ„ËÌ</label>
                         <div class="col-sm-8">
                             <input name="login" id="login" value="<?=$this->model->login;?>" class="form-control">
-                            <div class="error_edit"><?=$errors['login'][0];?></div>
+                            <div class="error_edit error_login"><?=$errors['login'][0];?></div>
                         </div>
                     </div>
 
@@ -71,8 +71,8 @@
                     <div class="form-group">
                         <label class="col-sm-4 control-label">Email</label>
                         <div class="col-sm-8">
-                            <input name="email" id="email"  class="form-control" value="<?=$this->model->email;?>">
-                            <div class="error_edit"><?=$errors['email'][0];?></div>
+                            <input name="email" id="email" class="form-control" value="<?=$this->model->email;?>">
+                            <div class="error_edit error_email"><?=$errors['email'][0];?></div>
                         </div>
                     </div>
 
@@ -82,7 +82,6 @@
                             <input name="company" class="form-control" value="<?=$this->model->company;?>">
                         </div>
                     </div>
-
 
                     <div class="form-group">
                         <label class="col-sm-4 control-label"></label>

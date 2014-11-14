@@ -28,7 +28,9 @@
     <![endif]-->
 </head>
 <body>
-
+<script>
+    var url = "<?=Yii::app()->request->baseUrl;?>";
+</script>
 <?php $this->renderPartial("application.views.cpanel.extend.header");?>
     <section>
         <div class="mainwrapper">
