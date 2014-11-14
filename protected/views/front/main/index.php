@@ -1,18 +1,19 @@
-<div style="margin-left: 50px;">
-<a href="<?=$this->createUrl($this->inSystemUrl);?>"><?=$this->inSystem?'Выйти':'Войти';?></a><br>
+<div class="path">Главная</div>
+<div style="padding-top: 90px"></div>
+<table class="contentOnMain">
+    <tr>
+        <td class="leftColumn"><img src="<?=Yii::app()->request->baseUrl;?>/images/front/mans.png"></td>
+        <td class="rightColumn">
+            <h1>Вся херня</h1>
+            <div style="padding-top: 30px"></div>
+        <div class="textMain">fsdfasd fds fasd fasdf asdf asfas fa asdfsdfasd fds fasd fasdf asdf asfas fa asdfsdfasd fds fasd fasdf asdf asfas fa asdfsdfasd fds fasd fasdf asdf asfas fa asdfsdfasd fds fasd fasdf asdf asfas fa asdfsdfasd fds fasd fasdf asdf asfas fa asdfsdfasd fds fasd fasdf asdf asfas fa asdfsdfasd fds fasd fasdf asdf asfas fa asdfsdfasd fds fasd fasdf asdf asfas fa asd</div>
 
-<?if($this->inSystem):?>
-<a href="<?=$this->createUrl('/cabinet');?>">Личный кабинет</a><br>
-<?endif;?>
-
-<a href="<?=$this->createUrl('user/registration');?>">Регистрация</a>
-</div>
+            <?$this->renderPartial("application.views.front.extend.misha")?>
 
 
-<hr>
+        </td>
+    </tr>
 
-<div style="margin-top: 20px; margin-left: 50px;">
-    <?foreach($this->users as $item):?>
-        <a href="<?=$this->createUrl('/rating?user='.$item->id);?>"><?=$item->name;?></a><br>
-    <?endforeach;?>
-</div>
+</table>
+
+<?$this->renderPartial("application.views.front.extend.blockquote")?>
