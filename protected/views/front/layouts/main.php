@@ -16,6 +16,11 @@
 
 
     <script src="<?=Yii::app()->request->baseUrl;?>/js/jquery-1.11.1.min.js"></script>
+    <script src="<?=Yii::app()->request->baseUrl;?>/js/jquery-ui-1.10.3.min.js"></script>
+    <script src="<?=Yii::app()->request->baseUrl;?>/js/bootbox.min.js"></script>
+    <script src="<?=Yii::app()->request->baseUrl;?>/js/bootstrap.min.js"></script>
+    <script src="<?=Yii::app()->request->baseUrl;?>/js/jquery.maskedinput.min.js"></script>
+    <script src="<?=Yii::app()->request->baseUrl;?>/js/front.js"></script>
     <!--[if !IE 7]>
     <style type="text/css">
         #wrap {display:table;height:100%}
@@ -29,19 +34,17 @@
 </script>
 
 <div id="wrap">
+<style>
 
-
+</style>
        <div id="mainContainer">
     <div class="header">
     <div class="logo"><img src="<?=Yii::app()->request->baseUrl;?>/images/front/logofront.png"></div>
     <div class="signinForm">
-        <label for="login">Логин: </label> <input type="text" id="login">
-        <label for="password">Пароль: </label><input type="text" id="password">
-        <button><img src="<?=Yii::app()->request->baseUrl;?>/images/front/go.png"></button>
-        <div class="forgotContainer">
-            <a href="" class="forgot">Забыли пароль?</a>
-            <a href="" class="signin">Регистрация.</a>
-        </div>
+
+        <?$this->renderPartial("application.views.front.extend.login")?>
+
+
     </div>
 
     <div class="contactOnMain">
@@ -75,6 +78,7 @@
     <div class="footerContainer">
 fsd asd fasdf asd
     </div>
+    <?=MYChtml::showMessage($_GET);?>
 </div>
 </body>
 </html>

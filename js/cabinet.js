@@ -6,32 +6,35 @@ function getResult(data){
 
 function saveComment(){
 
-    $.post(url+"/Rating/saveComment",{id:editRatingId,rating:$("input[name='rating']:checked").val(),description:$("textarea[name='description']").val()},function(data){
+    $.post(url+"/cpanel/Rating/saveRating",{id:editRatingId,rating:$("input[name='rating']:checked").val(),description:$("textarea[name='description']").val()},function(data){
 
-        if(getResult(data)) location.reload();
+        if(getResult(data)) location.href = url+"/cpanel/rating";
         else bootbox.alert('Ошибка редактирования');
 
     });
+    return false;
 }
 
+$(document).ready(function(){
+
 // Редактирование комментария
-$(".editComment").click(function(){
-
+$(".editRow").click(function(){
     var obj = $(this);
-    editRatingId = obj.attr('id').substr(8);
-
-    $.post(url+"/Rating/editComment",{id:editRatingId},function(data){
-        if(getResult(data)) $("#editDiv").html(data);
+    editRatingId = obj.attr("data-rel");
+    $.post(url+"/cpanel/Rating/editRating",{id:editRatingId},function(data){
+        if(getResult(data)) bootbox.alert(data);
         else bootbox.alert('Ошибка редактирования');
     });
 });
 
 //удаление комментария
-$(".deleteComment").click(function(){
-    if(!confirm('Удалить выбранный комментарий?')) return false;
+$(".removeRow").click(function(){
+    if(!confirm('Удалить выбранный отзыв?')) return false;
     var obj = $(this);
-    $.post(url+"/Rating/deleteComment",{id:obj.attr('id').substr(8)},function(data){
+    $.post(url+"/cpanel/Rating/deleteRating",{id:obj.attr('data-rel')},function(data){
         if(getResult(data)) obj.parent().parent().fadeOut();
         else bootbox.alert('Ошибка удаления');
     });
+});
+
 });

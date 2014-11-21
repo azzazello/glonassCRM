@@ -10,6 +10,13 @@ class ControlerCPanel extends CController
 {
     public $layout='//layouts/main';
 
+    public $true = '//ajaxOk';
+    public $false = '//ajaxERROR';
+    public $pagination;
+    const PAGE_SIZE = 4;
+    public $criteria;
+
+
     public function filters()
     {
         return array(
@@ -17,8 +24,8 @@ class ControlerCPanel extends CController
         );
     }
 
-    public  function  filterCheckAccess($filterChain) {
-        if (Yii::app()->user->isGuest) {
+    public  function  filterCheckAccess($filterChain){
+        if (Yii::app()->user->isGuest){
             $this->redirect($this->createUrl( "../login" ));
         }
 
@@ -26,4 +33,10 @@ class ControlerCPanel extends CController
         return true;
     }
 
+    public  function getPagination(){		//Pagination
+        $count = CActiveRecord::model($this->model)->count($this->criteria);
+        $this->pagination = new CPagination($count);
+        $this->pagination->pageSize = self::PAGE_SIZE;
+        $this->pagination->applyLimit($this->criteria);
+    }
 }

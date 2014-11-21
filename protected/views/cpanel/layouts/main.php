@@ -41,33 +41,25 @@
         </div><!-- mainwrapper -->
     </section>
 
-
-
-<script src="<?=Yii::app()->request->baseUrl;?>/theme/main/js/jquery-migrate-1.2.1.min.js"></script>
-<script src="<?=Yii::app()->request->baseUrl;?>/theme/main/js/bootstrap.min.js"></script>
+<script src="<?=Yii::app()->request->baseUrl;?>/theme/main/js/custom.js"></script>
+<script src="<?=Yii::app()->request->baseUrl;?>/theme/main/js/toggles.min.js"></script>
 <script src="<?=Yii::app()->request->baseUrl;?>/js/bootbox.min.js"></script>
 <script src="<?=Yii::app()->request->baseUrl;?>/js/bootstrap.min.js"></script>
-<script src="<?=Yii::app()->request->baseUrl;?>/theme/main/js/modernizr.min.js"></script>
-<script src="<?=Yii::app()->request->baseUrl;?>/theme/main/js/pace.min.js"></script>
-<script src="<?=Yii::app()->request->baseUrl;?>/theme/main/js/retina.min.js"></script>
-<script src="<?=Yii::app()->request->baseUrl;?>/theme/main/js/jquery.cookies.js"></script>
-<script src="<?=Yii::app()->request->baseUrl;?>/theme/main/js/toggles.min.js"></script>
-<!--<script src="<?=Yii::app()->request->baseUrl;?>/theme/main/js/flot/jquery.flot.min.js"></script>
-<script src="<?=Yii::app()->request->baseUrl;?>/theme/main/js/flot/jquery.flot.resize.min.js"></script>
-<script src="<?=Yii::app()->request->baseUrl;?>/theme/main/js/flot/jquery.flot.spline.min.js"></script>-->
-<script src="<?=Yii::app()->request->baseUrl;?>/theme/main/js/jquery.sparkline.min.js"></script>
-<script src="<?=Yii::app()->request->baseUrl;?>/theme/main/js/morris.min.js"></script>
-<script src="<?=Yii::app()->request->baseUrl;?>/theme/main/js/raphael-2.1.0.min.js"></script>
-<script src="<?=Yii::app()->request->baseUrl;?>/theme/main/js/bootstrap-wizard.min.js"></script>
-<script src="<?=Yii::app()->request->baseUrl;?>/theme/main/js/select2.min.js"></script>
+<script src="<?=Yii::app()->request->baseUrl;?>/js/modernizr.min.js"></script>
+<script src="<?=Yii::app()->request->baseUrl;?>/js/pace.min.js"></script>
+<script src="<?=Yii::app()->request->baseUrl;?>/js/jquery.cookies.js"></script>
+<script src="<?=Yii::app()->request->baseUrl;?>/js/jquery.sparkline.min.js"></script>
+<script src="<?=Yii::app()->request->baseUrl;?>/js/morris.min.js"></script>
+<script src="<?=Yii::app()->request->baseUrl;?>/js/raphael-2.1.0.min.js"></script>
+<script src="<?=Yii::app()->request->baseUrl;?>/js/bootstrap-wizard.min.js"></script>
+<script src="<?=Yii::app()->request->baseUrl;?>/js/select2.min.js"></script>
 <script type="text/javascript" src="<?=Yii::app()->BaseUrl?>/js/datepicker/picker.js"></script>
 <script type="text/javascript" src="<?=Yii::app()->BaseUrl?>/js/datepicker/picker.date.js"></script>
 <script type="text/javascript" src="<?=Yii::app()->BaseUrl?>/js/datepicker/picker.time.js"></script>
-<script src="<?=Yii::app()->request->baseUrl;?>/theme/main/js/custom.js"></script>
 <script src="<?=Yii::app()->request->baseUrl;?>/js/custom.js"></script>
-<script src="<?=Yii::app()->request->baseUrl;?>/js/jquery.gritter.min.js"></script>
 <script src="<?=Yii::app()->request->baseUrl;?>/js/jquery.maskedinput.min.js"></script>
-<!--<script src="<?=Yii::app()->request->baseUrl;?>/theme/main/js/dashboard.js"></script>-->
+
+
 <?=MYChtml::showMessage($_GET);?>
 
 </body>

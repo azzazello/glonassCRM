@@ -11,14 +11,7 @@
  *
  * @property integer $id
  * @property string $firm
- * @property integer $contract
- * @property integer $rias
- * @property integer $some_from
- * @property integer $all_from
- * @property integer $nkhp
- * @property integer $is_nkhp
- * @property integer $is_nzt
- * @property string $shorts
+ * @property integer $status
  *
  * @property RequestShipping[] $requestShippings
  */
@@ -42,11 +35,10 @@ abstract class BaseTrader extends GxActiveRecord {
 
 	public function rules() {
 		return array(
-			array('firm, rias, some_from, all_from', 'required'),
-			array('contract, rias, some_from, all_from, nkhp, is_nkhp, is_nzt', 'numerical', 'integerOnly'=>true),
-			array('shorts', 'length', 'max'=>4),
-			array('contract, nkhp, is_nkhp, is_nzt, shorts', 'default', 'setOnEmpty' => true, 'value' => null),
-			array('id, firm, contract, rias, some_from, all_from, nkhp, is_nkhp, is_nzt, shorts', 'safe', 'on'=>'search'),
+			array('firm', 'required'),
+			array('status', 'numerical', 'integerOnly'=>true),
+			array('status', 'default', 'setOnEmpty' => true, 'value' => null),
+			array('id, firm, status', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -65,14 +57,7 @@ abstract class BaseTrader extends GxActiveRecord {
 		return array(
 			'id' => Yii::t('app', 'ID'),
 			'firm' => Yii::t('app', 'Firm'),
-			'contract' => Yii::t('app', 'Contract'),
-			'rias' => Yii::t('app', 'Rias'),
-			'some_from' => Yii::t('app', 'Some From'),
-			'all_from' => Yii::t('app', 'All From'),
-			'nkhp' => Yii::t('app', 'Nkhp'),
-			'is_nkhp' => Yii::t('app', 'Is Nkhp'),
-			'is_nzt' => Yii::t('app', 'Is Nzt'),
-			'shorts' => Yii::t('app', 'Shorts'),
+			'status' => Yii::t('app', 'Status'),
 			'requestShippings' => null,
 		);
 	}
@@ -82,14 +67,7 @@ abstract class BaseTrader extends GxActiveRecord {
 
 		$criteria->compare('id', $this->id);
 		$criteria->compare('firm', $this->firm, true);
-		$criteria->compare('contract', $this->contract);
-		$criteria->compare('rias', $this->rias);
-		$criteria->compare('some_from', $this->some_from);
-		$criteria->compare('all_from', $this->all_from);
-		$criteria->compare('nkhp', $this->nkhp);
-		$criteria->compare('is_nkhp', $this->is_nkhp);
-		$criteria->compare('is_nzt', $this->is_nzt);
-		$criteria->compare('shorts', $this->shorts, true);
+		$criteria->compare('status', $this->status);
 
 		return new CActiveDataProvider($this, array(
 			'criteria' => $criteria,

@@ -14,8 +14,6 @@ class LoginController extends Controller
 
         public function actionIndex()
         {
-            if (!Yii::app()->user->isGuest) $this->inCabinet();
-
             $model = new LoginForm;
 
             if (isset($_POST['LoginForm'])){
@@ -25,17 +23,18 @@ class LoginController extends Controller
                 if ($valid && $model->authenticate()){
                    $this->inCabinet();
                 }
-                $this->message = 'Не верный логин или пароль';
+                $this->redirection('/main?error=login',array());
             }
-            $this->render('index', array('model' => $model));
+            $this->redirection('/main',array());
+        }
+
+        public function actionRecovery(){
+            $this->title = 'Восстановление пароля';
+            $this->render('recovery');
         }
 
         public function redirection($url,$array){
             $this->redirect( $this->createUrl($url,$array) );
-        }
-
-        public function actionrecovery(){
-            $this->render('recovery');
         }
 
         public function actionnewpassword(){
@@ -43,7 +42,7 @@ class LoginController extends Controller
             $this->title = 'Восстановление пароля';
             if(Users::model()->find("`id`=:id AND generate=:generate",array(":generate"=>$_GET['generate'],":id"=>$_GET['id']))){
                 $this->render('newpassword',array('id'=>$_GET['id']));
-            }else $this->redirect( $this->createUrl('index',array('error'=>'recovery')) );
+            }else $this->redirect( $this->createUrl('recovery',array('error'=>'recovery')) );
 
         }
 

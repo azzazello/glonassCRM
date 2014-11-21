@@ -117,9 +117,9 @@ return array(
 
         'db'=>array(
             'connectionString' => 'mysql:host=192.168.0.89;dbname=zernovoz',
-            //'connectionString' => 'mysql:host=192.168.0.224;dbname=glonass',
+           // 'connectionString' => 'mysql:host=192.168.0.224;dbname=glonass',
             'emulatePrepare' => true,
-           // 'username' => 'misha',
+         //   'username' => 'misha',
             'username' => 'root',
             'password' => '1111',
             'charset' => 'cp1251',
@@ -153,6 +153,7 @@ return array(
             "fromname" => "ѕисьмо с сайта", //им€
             "from" => "robot@bp-sever.ru", //от кого info@osb-plywood.ru
             "charset" => "UTF-8", //от кого
-        )
+        ),
+        'service'=>array('url'=>'http://192.168.0.224:9994')
     )
 );

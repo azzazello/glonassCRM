@@ -35,23 +35,28 @@ class AjaxController extends ControlerCPanel
     }
 
     public  function actionDeleteonerequestshipping($id){
-
-        if (RequestShipping::model()->deleteByPK($id)) echo "true"; else echo "error";
+        echo RequestShipping::model()->deleteByPK($id)?"true":"error";
     }
 
-    public function actionConfirmreply($id) {
-        if (ReplyShipping::model()->updateByPK($id,array("confirm"=>1))) echo "true"; else echo "error";
+    public function actionConfirmreply($id){
+        echo ReplyShipping::model()->updateByPK($id,array("confirm"=>1))?"true":"error";
     }
 
-    public function actionUnconfirmreply($id) {
-        if (ReplyShipping::model()->updateByPK($id,array("confirm"=>0))) echo "true"; else echo "error";
+    public function actionUnconfirmreply($id){
+        echo ReplyShipping::model()->updateByPK($id,array("confirm"=>0))?"true":"error";
     }
 
-    public function actionDelconfirmreply($id) {
-        if (ReplyShipping::model()->updateByPK($id,array("confirm"=>2))) echo "true"; else echo "error";
+    public function actionDelconfirmreply($id){
+        echo ReplyShipping::model()->updateByPK($id,array("confirm"=>2))?"true":"error";
     }
 
-    public function actionAddlastviewreply($id) {
+    public function actionaddTrader(){
+        $model = new Trader;
+        $model->firm = MYChtml::fromUTF8($_POST['trader']);
+        echo $model->save()?$model->id:0;
+    }
+
+    public function actionAddlastviewreply($id){
         $lastReply =  ReplyShipping::model()->find(array("condition"=>"request_id=:id","params"=>array(":id"=>$id),"order"=>"id desc"));
         if ($lastReply) {
             OperationWithRequests::model()->deleteAll("idRequest=".(int)$id);
@@ -65,7 +70,6 @@ class AjaxController extends ControlerCPanel
         }
         echo "true";
         //
-
     }
 
 

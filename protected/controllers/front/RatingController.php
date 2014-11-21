@@ -4,10 +4,13 @@ class RatingController extends Controller
 {
     public $errors;
     public $comments;
+    public $inSystem = false;
 
 	public function actionIndex()
 	{
         $this->checkUserId($_GET['user']);
+
+        if( !Yii::app()->user->isGuest ) $this->inSystem = true;
 
         if(Yii::app()->request->isPostRequest){
             $this->isGuest();
@@ -28,7 +31,8 @@ class RatingController extends Controller
         $this->comments = Rating::getMyComments();
         $this->render('comments');
     }
-    public function actiondeleteComment(){
+
+   /* public function actiondeleteComment(){
         if(Yii::app()->request->isAjaxRequest){
             $result = Rating::deleteComment($_POST['id'])?'true':'false';
             $this->renderPartial($this->$result);
@@ -40,13 +44,6 @@ class RatingController extends Controller
             $result = Rating::editComment($_POST)?'true':'false';
             $this->renderPartial($this->$result);
         }
-    }
-
-    public function actioneditComment(){
-        if(Yii::app()->request->isAjaxRequest){
-            if(!$rating = Rating::getRecordForEdit($_POST['id'])) $this->renderFalse();
-            $this->renderPartial('render/edit',array('rating'=>$rating));
-        }
-    }
+    }*/
 
 }

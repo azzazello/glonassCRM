@@ -46,7 +46,7 @@ class Users extends BaseUsers
     }
 
     public static function checkDoubleLogin($login){
-        return Users::model()->resetScope()->count("login=:login",array(":login"=>AccessoryFunctions::clearTel($login)));
+        return Users::model()->resetScope()->count("login=:login and confirm=1",array(":login"=>AccessoryFunctions::clearTel($login)));
     }
 
     public static function checkDoubleEmail($email,$edit = 0){

@@ -2,7 +2,7 @@
 class Forwebservices
 {
 
-    public  static  function  newRequestShipping($data, $url = "192.168.0.224:1079") {
+    public  static function  newRequestShipping($data, $url = "192.168.0.224:1079"){
 
         $url = "http://".$url."/json/reply/NewShippingRequest";
         $params = $data;
@@ -16,11 +16,15 @@ class Forwebservices
     }
 
     public static function confirmAccount($phone,$code){
-        $url = 'http://192.168.0.224:9994/json/reply/ActivateAccountRequest';
+        $url =  Yii::app()->params['service']['url'].'/json/reply/ActivateAccountRequest';
         $params = array(
             'Phone' => AccessoryFunctions::clearTel($phone),
             'Code' => $code
         );
+        return self::getContents($params,$url);
+    }
+
+    public static function getContents($params,$url){
         return file_get_contents($url, false, stream_context_create(array(
             'http' => array(
                 'method'  => 'POST',
@@ -30,26 +34,17 @@ class Forwebservices
         )));
     }
 
-
     public static function SendCodeRequest($phone){
-
-        $url = 'http://192.168.0.224:9994/json/reply/SendCodeRequest';
+        $url = Yii::app()->params['service']['url'].'/json/reply/SendCodeRequest';
         $params = array(
             'Phone' => AccessoryFunctions::clearTel($phone)
         );
-       return file_get_contents($url, false, stream_context_create(array(
-            'http' => array(
-                'method'  => 'POST',
-                'header'  => 'Content-type: application/x-www-form-urlencoded',
-                'content' => http_build_query($params)
-            )
-        )));
-
+        return self::getContents($params,$url);
     }
 
     public static function SignUpRequestV1($post){
 
-        $url = 'http://192.168.0.224:9994/json/reply/SignUpRequestV1';
+        $url = Yii::app()->params['service']['url'].'/json/reply/SignUpRequestV1';
         $params = array(
             'Phone' =>  AccessoryFunctions::clearTel($post['login']),
             'Password' => $post['password'],

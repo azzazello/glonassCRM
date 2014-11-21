@@ -12,3 +12,13 @@ table.colabrators {border: 1px solid rgba(0, 0, 0, 0.26)}
 
 .priceDown {font-weight: bold; color: green}
 .priceUp {font-weight: bold; color: red}
+
+#add_trader_input{
+    width: 300px;
+    margin-top: 10px;
+    display: none;
+}
+li.selected a{
+    background-color: #428BCA !important;
+    color: white  !important;
+}

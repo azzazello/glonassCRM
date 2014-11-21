@@ -33,7 +33,7 @@ class UserIdentity extends CUserIdentity
             $users->mobile_platform = 0;
             $users->mobile_version = 0;
             $users->save();
-          //  Yii::app()->user->setState("role", $users->role);
+            Yii::app()->user->setState("name", $users->name);
             $this->errorCode=self::ERROR_NONE;
         }
 

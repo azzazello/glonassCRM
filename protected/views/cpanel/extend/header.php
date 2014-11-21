@@ -15,9 +15,9 @@
 
             <div class="pull-right">
 
-                <form class="form form-search" action="search-results.html">
+                <!--<form class="form form-search" action="search-results.html">
                     <input type="search" class="form-control" placeholder="Search" />
-                </form>
+                </form>-->
 
                 <div class="btn-group btn-group-list btn-group-notification">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -136,7 +136,7 @@
                         <li><a href="<?=$this->createUrl("/profile");?>"><i class="glyphicon glyphicon-user"></i> Мой профиль</a></li>
                         <li><a href="#"><i class="glyphicon glyphicon-star"></i> Настройки</a></li>
                         <li><a href="#"><i class="glyphicon glyphicon-cog"></i> Финансы</a></li>
-                        <li><a href="<?=$this->createUrl("../");?>"><i class="glyphicon glyphicon-question-sign"></i>Сайт</a></li>
+                        <li><a href="<?=$this->createUrl("../");?>" target="_blank"><i class="glyphicon glyphicon-question-sign"></i>Сайт</a></li>
                         <li class="divider"></li>
                         <li><a href="<?=$this->createUrl("./login/exit");?>"><i class="glyphicon glyphicon-log-out"></i>Выход</a></li>
                     </ul>

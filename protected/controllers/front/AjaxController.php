@@ -52,21 +52,25 @@ class AjaxController extends Controller
         foreach($parse_str as $k=>$v){
             $this->post[$k] = MYChtml::fromUTF8($v);// iconv("UTF-8","windows-1251",$v);
         }
+
         if(Users::checkDoubleLogin($this->post['login'])) $this->ajaxMessages('dphone');
-        if(Users::checkDoubleEmail($this->post['email'])) $this->ajaxMessages('demail');
-        if(!AccessoryFunctions::emailValidation($this->post['email'])) $this->ajaxMessages('femail');
+
+        if(strlen($this->post['email'])>0){
+            if(Users::checkDoubleEmail($this->post['email'])) $this->ajaxMessages('demail');
+            if(!AccessoryFunctions::emailValidation($this->post['email'])) $this->ajaxMessages('femail');
+        }
+
         if($this->post['password']!=$this->post['password_repeat']) $this->ajaxMessages('dpassword');
         echo Users::saveUser($this->post);
     }
 
     public function actionconfirmAccount(){     //Подтверждение регистрации
-
         echo Forwebservices::confirmAccount($_POST['phone'],$_POST['code']);
 
     }
 
     public function  actionSendCodeRequest(){   //Повторная отправка кода
-        echo Forwebservices::newRequestShipping($_POST['phone']);
+        echo Forwebservices::SendCodeRequest($_POST['phone']);
 
     }
 

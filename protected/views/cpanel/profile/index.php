@@ -20,7 +20,7 @@
 
         <div class="panel panel-primary-head">
             <div class="panel-heading">
-                <h4 class="panel-title">Ваш профиль</h4>
+                <h4 class="panel-title">Мой профиль</h4>
                 <p>На данной странице вы можете просмотреть и отредактировать личные данные</p>
             </div><!-- panel-heading -->
 

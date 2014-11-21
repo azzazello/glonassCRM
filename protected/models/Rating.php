@@ -18,9 +18,17 @@ class Rating extends BaseRating
         );
     }
 
-    public function getDbConnection(){      //ÓÁÐÀÒÜ ÏÎÒÎÌ Ê ÕÓßÌ ÑÎÁÀ×ÈÌ
-        return Yii::app()->igor;
+    public function relations()
+    {
+        return array(
+            'Users'=>array(self::HAS_ONE, 'Users', array('id'=>'user_id_create'))
+        );
     }
+
+
+    /*  public function getDbConnection(){      //ÓÁÐÀÒÜ ÏÎÒÎÌ Ê ÕÓßÌ ÑÎÁÀ×ÈÌ
+        return Yii::app()->igor;
+    }*/
 
     public static function add($data){
         $model = new Rating;
@@ -43,7 +51,7 @@ class Rating extends BaseRating
         return (!$rating = self::checkUser($id))?false:$rating;
     }
 
-    public static function editComment($post){
+    public static function editRating($post){
         if(!$rating = self::checkUser($post['id'])) return false;
         $rating->rating = $post['rating'];
         $rating->description = iconv("UTF-8","windows-1251",$post['description']);
@@ -55,9 +63,21 @@ class Rating extends BaseRating
         return ($rating->user_id_create!=General::getMyUserId())?false:$rating;
     }
 
-    public static function deleteComment($id){
+    public static function deleteRating($id){
        if(!$rating = self::checkUser($id)) return false;
                $rating->delete = 1;
         return $rating->save();
+    }
+
+
+    public static function criteriaForGetMyRating(){
+        $criteria = new CDbCriteria;
+        $criteria->condition = "user_id_create=:user_id_create";
+        $criteria->params = array(":user_id_create"=>General::getMyUserId());
+        return $criteria;
+    }
+
+    public static function getMyRatings($criteria){
+        return Rating::model()->findAll($criteria);
     }
 }

@@ -13,7 +13,7 @@
         <div class="panel panel-primary-head">
         <div class="panel-heading">
             <h4 class="panel-title">Добавление новой заявки</h4>
-            <p>Searching, ordering, paging etc goodness will be immediately added to the table, as shown in this example.</p>
+            <p>На данной странице вы можете оформить новую заявку.</p>
         </div><!-- panel-heading -->
 
 <br>
@@ -104,9 +104,12 @@
         <label class="col-sm-4 control-label">Выберите Трейдера:</label>
         <div class="col-sm-8">
             <?=FormHTML::select(Trader::getAll(),"trader","trader","Выберите трейдера");?>
+            <br>
+            <input name="" id="add_trader_input" class="form-control" placeholder="Введите название Трейдера">
+            <br>
+            <a href="#" id="add_trader">добавить</a>
         </div>
     </div>
-
 
     <div class="form-group">
         <label class="col-sm-4 control-label">Цена перевозки, руб/кг:</label>
