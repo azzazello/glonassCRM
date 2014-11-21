@@ -76,6 +76,8 @@
     <script>
         $(document).ready(function(){
 
+
+            $(".select2").select2();
             $(".rows").click(function(){
                var id = $(this).attr("id");
                var id1 = $(this).attr("data-rel");
@@ -107,7 +109,9 @@
             $(".confirm").live("click",function(){
                 var id = $(this).attr("data-rel");
                 var idRequest = $(this).attr("data-content");
-                $.get("<?=$this->createUrl("/ajax/confirmreply")?>",{"id":id},function(data) {
+                var phone = $(this).attr("data-category");
+
+                $.get("<?=$this->createUrl("/ajax/confirmreply")?>",{"id":id,"phone":phone},function(data) {
                     if (data == "true") {
 
                         $("#iidr"+idRequest+" .confirmReply").append($("#reply"+id));
@@ -132,7 +136,8 @@
             $(".unconfirm").live("click",function(){
                 var id = $(this).attr("data-rel");
                 var idRequest = $(this).attr("data-content");
-                $.get("<?=$this->createUrl("/ajax/unconfirmreply")?>",{"id":id},function(data) {
+                var phone = $(this).attr("data-category");
+                $.get("<?=$this->createUrl("/ajax/unconfirmreply")?>",{"id":id,"phone":phone},function(data) {
                     if (data == "true") {
 
                         $("#iidr"+idRequest+" .unconfirmReply").append($("#reply"+id));
@@ -156,8 +161,9 @@
 
             $(".deletereply").live("click",function(){
                 var id = $(this).attr("data-rel");
+                var phone = $(this).attr("data-category");
                 if (confirm("¬ы действительно хотите удалить этот ответ?"))  {
-                $.get("<?=$this->createUrl("/ajax/delconfirmreply")?>",{"id":id},function(data) {
+                $.get("<?=$this->createUrl("/ajax/delconfirmreply")?>",{"id":id,"phone":phone},function(data) {
                     if (data == "true") {
 
                         $("#reply"+id).remove();

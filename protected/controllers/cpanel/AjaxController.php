@@ -39,15 +39,20 @@ class AjaxController extends ControlerCPanel
         if (RequestShipping::model()->deleteByPK($id)) echo "true"; else echo "error";
     }
 
-    public function actionConfirmreply($id) {
+    public function actionConfirmreply($id,$phone) {
+
+        Forwebservices::Confirmreply($id,$phone);
         if (ReplyShipping::model()->updateByPK($id,array("confirm"=>1))) echo "true"; else echo "error";
     }
 
-    public function actionUnconfirmreply($id) {
+    public function actionUnconfirmreply($id,$phone) {
+
+        Forwebservices::Unconfirmreply($id,$phone);
         if (ReplyShipping::model()->updateByPK($id,array("confirm"=>0))) echo "true"; else echo "error";
     }
 
-    public function actionDelconfirmreply($id) {
+    public function actionDelconfirmreply($id,$phone) {
+        Forwebservices::DeleteReply($id,$phone);
         if (ReplyShipping::model()->updateByPK($id,array("confirm"=>2))) echo "true"; else echo "error";
     }
 

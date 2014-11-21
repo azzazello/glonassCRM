@@ -12,3 +12,5 @@ table.colabrators {border: 1px solid rgba(0, 0, 0, 0.26)}
 
 .priceDown {font-weight: bold; color: green}
 .priceUp {font-weight: bold; color: red}
+#basicTable td {color: #252525 !important;}
+.padding-select {height: 26px;}
