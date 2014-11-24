@@ -50,6 +50,7 @@ class Forwebservices
     private  static function ReplyStatusChanged($data, $url) {
         $url = "http://".$url."/json/reply/ReplyStatusChanged";
         $params = $data;
+
         return $result = file_get_contents($url, false, stream_context_create(array(
             'http' => array(
                 'method'  => 'POST',
@@ -65,11 +66,11 @@ class Forwebservices
 
         $data = array(
                 "RequestId"=>$id,
-                "Phone"=>$phone,
+                "Phones"=>$phone,
                 "IsConfirmed"=>1
                 );
 
-       self::ReplyStatusChanged($data,$url);
+        return self::ReplyStatusChanged($data,$url);
     }
 
 
@@ -77,21 +78,21 @@ class Forwebservices
 
         $data = array(
             "RequestId"=>$id,
-            "Phone"=>$phone,
+            "Phones"=>$phone,
             "IsConfirmed"=>0
         );
 
-        self::ReplyStatusChanged($data,$url);
+        return self::ReplyStatusChanged($data,$url);
     }
 
     public static function DeleteReply($id,$phone, $url = "192.168.0.224:1079"){
 
         $data = array(
             "RequestId"=>$id,
-            "Phone"=>$phone,
+            "Phones"=>$phone,
             "IsConfirmed"=>2
         );
-        self::ReplyStatusChanged($data,$url);
+        return self::ReplyStatusChanged($data,$url);
     }
 
     public static function SignUpRequestV1($post){

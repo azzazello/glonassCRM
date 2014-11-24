@@ -14,3 +14,7 @@ table.colabrators {border: 1px solid rgba(0, 0, 0, 0.26)}
 .priceUp {font-weight: bold; color: red}
 #basicTable td {color: #252525 !important;}
 .padding-select {height: 26px;}
+.priceTd {font-size: 11px}
+.priceTd b {font-size: 12px}
+.highlight-row {background-color: rgba(65, 140, 202, 0.31) !important; }
+.highlight-row td {background-color: rgba(65, 140, 202, 0.31) !important;}

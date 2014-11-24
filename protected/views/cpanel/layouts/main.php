@@ -33,8 +33,11 @@
     <section>
         <div class="mainwrapper">
 
+
+
             <?php $this->renderPartial("application.views.cpanel.extend.leftpanel");?>
             <?php echo $content; ?>
+            <?php $this->renderPartial("application.views.cpanel.extend.loadscreen");?>
 
         </div><!-- mainwrapper -->
     </section>

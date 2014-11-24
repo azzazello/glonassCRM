@@ -19,4 +19,15 @@ jQuery(document).ready(function() {
         $(this).val( $(this).val().replace(",","."));
     });
 
+
 });
+
+
+
+function locked() {
+$(".locked").show();
+}
+
+function unLocked() {
+    $(".locked").hide();
+}

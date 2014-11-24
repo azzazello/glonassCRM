@@ -162,7 +162,7 @@
 
 </form>
 
-            </div>
+</div>
         </div>
         </div>
 </div>
@@ -173,8 +173,7 @@
     jQuery(document).ready(function() {
 
         $("#sendButton").click(function(){
-            $("#spinner").show();
-
+          locked();
         });
 
         jQuery("#regions").removeClass("form-control");

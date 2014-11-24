@@ -39,21 +39,43 @@ class AjaxController extends ControlerCPanel
         if (RequestShipping::model()->deleteByPK($id)) echo "true"; else echo "error";
     }
 
-    public function actionConfirmreply($id,$phone) {
+    private  function confirmreply($requestId,$phone, $ids) {
 
-        Forwebservices::Confirmreply($id,$phone);
-        if (ReplyShipping::model()->updateByPK($id,array("confirm"=>1))) echo "true"; else echo "error";
+       Forwebservices::Confirmreply($requestId,$phone);
+        if (ReplyShipping::model()->updateByPK($ids,array("confirm"=>1))) echo json_encode(array("ids"=>$_GET["ids"],"result"=>"true")); else echo json_encode(array("result"=>"error"));
     }
 
-    public function actionUnconfirmreply($id,$phone) {
+    private  function unconfirmreply($requestId,$phone, $ids) {
 
-        Forwebservices::Unconfirmreply($id,$phone);
-        if (ReplyShipping::model()->updateByPK($id,array("confirm"=>0))) echo "true"; else echo "error";
+
+
+        Forwebservices::Unconfirmreply($requestId,$phone);
+        if (ReplyShipping::model()->updateByPK($ids,array("confirm"=>0))) echo json_encode(array("ids"=>$_GET["ids"],"result"=>"true")); else echo json_encode(array("result"=>"error"));
     }
 
-    public function actionDelconfirmreply($id,$phone) {
-        Forwebservices::DeleteReply($id,$phone);
-        if (ReplyShipping::model()->updateByPK($id,array("confirm"=>2))) echo "true"; else echo "error";
+    private function delconfirmreply($requestId, $phones, $ids) {
+
+        Forwebservices::DeleteReply($requestId,$phones);
+        if (ReplyShipping::model()->updateByPK($ids,array("confirm"=>2))) echo json_encode(array("ids"=>$_GET["ids"],"result"=>"true")); else echo json_encode(array("result"=>"error"));
+    }
+
+
+    public function actionChangestatusreply(){
+        $phones = $this->arrayToString($_GET['phones']);
+        $requestId =  $_GET['requestId'];
+        $ids = $_GET['ids'];
+        if ($_GET['status'] == 1) $this->confirmreply($requestId,$phones,$ids);
+        if ($_GET['status'] == 2) $this->delconfirmreply($requestId,$phones,$ids);
+        if ($_GET['status'] == 3) $this->unconfirmreply($requestId,$phones,$ids);
+
+    }
+
+    private function arrayToString($array){
+        $string = "";
+        foreach ($array as $val) {
+            $string.=$val.",";
+        }
+        return substr($string,0,strlen($string)-1);
     }
 
     public function actionAddlastviewreply($id) {
