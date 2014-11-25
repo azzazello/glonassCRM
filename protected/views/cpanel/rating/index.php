@@ -22,6 +22,7 @@
             <table id="basicTable" class="table table-striped table-bordered responsive">
                 <thead class="">
                 <tr>
+                    <th style="width: 10px;"></th>
                     <th style="width: 200px;">Дата создания</th>
                     <th>Текст</th>
                     <th style="width: 300px;">На кого написан отзыв</th>
@@ -33,6 +34,7 @@
                 <tbody>
                 <?foreach($this->ratings as $item):?>
                     <tr class="rows" id="idr" data-rel="">
+                        <th><input type="checkbox" value="<?=$item->id;?>"></th>
                         <td><?=MYChtml::view_date($item->date_create);?></td>
                         <td><?=$item->description;?></td>
                         <td><?=$item->Users->name;?></td>
