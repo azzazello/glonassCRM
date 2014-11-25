@@ -42,6 +42,54 @@ class Forwebservices
         return self::getContents($params,$url);
     }
 
+    private  static function ReplyStatusChanged($data, $url) {
+        $url = "http://".$url."/json/reply/ReplyStatusChanged";
+        $params = $data;
+
+        return $result = file_get_contents($url, false, stream_context_create(array(
+            'http' => array(
+                'method'  => 'POST',
+                'header'  => 'Content-type: application/x-www-form-urlencoded',
+                'content' => http_build_query($params)
+            )
+        )));
+
+    }
+
+
+    public static function Confirmreply($id,$phone, $url = "192.168.0.224:1079"){
+
+        $data = array(
+                "RequestId"=>$id,
+                "Phones"=>$phone,
+                "IsConfirmed"=>1
+                );
+
+        return self::ReplyStatusChanged($data,$url);
+    }
+
+
+    public static function Unconfirmreply($id,$phone, $url = "192.168.0.224:1079"){
+
+        $data = array(
+            "RequestId"=>$id,
+            "Phones"=>$phone,
+            "IsConfirmed"=>0
+        );
+
+        return self::ReplyStatusChanged($data,$url);
+    }
+
+    public static function DeleteReply($id,$phone, $url = "192.168.0.224:1079"){
+
+        $data = array(
+            "RequestId"=>$id,
+            "Phones"=>$phone,
+            "IsConfirmed"=>2
+        );
+        return self::ReplyStatusChanged($data,$url);
+    }
+
     public static function SignUpRequestV1($post){
 
         $url = Yii::app()->params['service']['url'].'/json/reply/SignUpRequestV1';

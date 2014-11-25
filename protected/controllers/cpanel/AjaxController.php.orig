@@ -38,6 +38,24 @@ class AjaxController extends ControlerCPanel
         echo RequestShipping::model()->deleteByPK($id)?"true":"error";
     }
 
+    public function actionConfirmreply($id){
+        echo ReplyShipping::model()->updateByPK($id,array("confirm"=>1))?"true":"error";
+    }
+
+<<<<<<< HEAD
+    public function actionUnconfirmreply($id){
+        echo ReplyShipping::model()->updateByPK($id,array("confirm"=>0))?"true":"error";
+    }
+
+    public function actionDelconfirmreply($id){
+        echo ReplyShipping::model()->updateByPK($id,array("confirm"=>2))?"true":"error";
+    }
+
+    public function actionaddTrader(){
+        $model = new Trader;
+        $model->firm = MYChtml::fromUTF8($_POST['trader']);
+        echo $model->save()?$model->id:0;
+=======
     private  function confirmreply($requestId,$phone, $ids) {
 
        Forwebservices::Confirmreply($requestId,$phone);
@@ -53,13 +71,6 @@ class AjaxController extends ControlerCPanel
     }
 
     private function delconfirmreply($requestId, $phones, $ids) {
-        echo ReplyShipping::model()->updateByPK($id,array("confirm"=>2))?"true":"error";
-    }
-
-    public function actionaddTrader(){
-        $model = new Trader;
-        $model->firm = MYChtml::fromUTF8($_POST['trader']);
-        echo $model->save()?$model->id:0;
 
         Forwebservices::DeleteReply($requestId,$phones);
         if (ReplyShipping::model()->updateByPK($ids,array("confirm"=>2))) echo json_encode(array("ids"=>$_GET["ids"],"result"=>"true")); else echo json_encode(array("result"=>"error"));
@@ -82,6 +93,7 @@ class AjaxController extends ControlerCPanel
             $string.=$val.",";
         }
         return substr($string,0,strlen($string)-1);
+>>>>>>> 80511b6e8025ef72f8ea667e4afbb084181508cb
     }
 
     public function actionAddlastviewreply($id){
@@ -98,7 +110,6 @@ class AjaxController extends ControlerCPanel
         }
         echo "true";
         //
-
     }
 
 

@@ -24,8 +24,8 @@
             if ($result["errno"] == -1) echo MYChtml::alert_msg("Сообщить об ошибке в БД");
             }
             if ($result["result"] == "noerror") {
-             //   $this->redirect($this->createUrl("requestshipping/create",array("success"=>1)));
-                echo MYChtml::success_msg("Заявка на перевозку сохранена.");
+                $this->redirect($this->createUrl("requestshipping/create",array("success"=>1)));
+                //echo MYChtml::success_msg("Заявка на перевозку сохранена.");
             }
 
             if ($_GET['success']==1) {
@@ -148,7 +148,7 @@
     </div>
 
     <div class="form-group">
-        <label class="col-sm-4 control-label">Дополнительное описание</label>
+        <label class="col-sm-4 control-label">Дополнительное описание<div style="color: #808080">укажите важну информацию по перевозке</div></label>
         <div class="col-sm-8">
             <textarea id="autoResizeTA"  name = "description" class="form-control" rows="5"></textarea>
         </div>
@@ -157,7 +157,7 @@
     <div class="form-group">
         <label class="col-sm-4 control-label"></label>
         <div class="col-sm-8">
-            <button type="submit">Отправить</button>
+            <button type="submit" id="sendButton">Отправить</button> <span id="spinner" style="display: none" ><img src="<?=Yii::app()->request->baseUrl;?>/img/loading.gif"></span>
         </div>
     </div>
 
@@ -165,13 +165,19 @@
 
 </form>
 
-            </div>
+</div>
         </div>
         </div>
 </div>
 
 <script>
+
+
     jQuery(document).ready(function() {
+
+        $("#sendButton").click(function(){
+          locked();
+        });
 
         jQuery("#regions").removeClass("form-control");
         jQuery('#regions').select2();
