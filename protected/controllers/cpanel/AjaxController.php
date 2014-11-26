@@ -2,19 +2,20 @@
 
 class AjaxController extends ControlerCPanel
 {
+
 	public function actionIndex()
 	{
 		$this->render('index');
 	}
 
+
+
     public  function  actionLocality($code,$name)
     {
         if(Yii::app()->request->isAjaxRequest){
-
             header('Content-Type: application/json; charset=utf-8');
             //echo json_encode(  MYChtml::toArrayAndToUtf8(,array("text"=>"NAME","id"=>"CODE")));
             echo json_encode(  Kladr::getLocalityInRegionArrayForSelect2($code,$name));
-
         }
     }
 
@@ -53,17 +54,16 @@ class AjaxController extends ControlerCPanel
     }
 
     private function delconfirmreply($requestId, $phones, $ids) {
-        echo ReplyShipping::model()->updateByPK($id,array("confirm"=>2))?"true":"error";
+        Forwebservices::DeleteReply($requestId,$phones);
+        if (ReplyShipping::model()->updateByPK($ids,array("confirm"=>2))) echo json_encode(array("ids"=>$_GET["ids"],"result"=>"true")); else echo json_encode(array("result"=>"error"));
     }
 
     public function actionaddTrader(){
         $model = new Trader;
         $model->firm = MYChtml::fromUTF8($_POST['trader']);
         echo $model->save()?$model->id:0;
-
-        Forwebservices::DeleteReply($requestId,$phones);
-        if (ReplyShipping::model()->updateByPK($ids,array("confirm"=>2))) echo json_encode(array("ids"=>$_GET["ids"],"result"=>"true")); else echo json_encode(array("result"=>"error"));
     }
+
 
 
     public function actionChangestatusreply(){
@@ -73,7 +73,6 @@ class AjaxController extends ControlerCPanel
         if ($_GET['status'] == 1) $this->confirmreply($requestId,$phones,$ids);
         if ($_GET['status'] == 2) $this->delconfirmreply($requestId,$phones,$ids);
         if ($_GET['status'] == 3) $this->unconfirmreply($requestId,$phones,$ids);
-
     }
 
     private function arrayToString($array){
@@ -98,8 +97,29 @@ class AjaxController extends ControlerCPanel
         }
         echo "true";
         //
-
     }
 
+    /*              ÓÏĞÀÂËÅÍÈÅ ÎÒÇÛÂÀÌÈ (ĞÅÒÈÍÃ)            */
 
+    public function actiondeleteRating(){
+            $result = Rating::deleteRating($_POST['id'])?'true':'false';
+            $this->renderPartial($this->$result);
+    }
+
+    public function actionsaveRating(){
+            $result = Rating::editRating($_POST)?'true':'false';
+            $this->renderPartial($this->$result);
+    }
+
+    public function actioneditRating(){
+            if(!$rating = Rating::getRecordForEdit($_POST['id'])) $this->renderFalse();
+            $this->renderPartial('/Rating/render/edit',array('rating'=>$rating));
+    }
+
+    public function actiondeleteAllRating(){
+            $result = Rating::deleteAllRating($_POST)?'true':'false';
+            $this->renderPartial($this->$result);
+    }
+
+    /*                                                      */
 }

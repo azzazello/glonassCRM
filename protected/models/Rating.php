@@ -69,6 +69,9 @@ class Rating extends BaseRating
         return $rating->save();
     }
 
+    public static function deleteAllRating($post){
+        return Rating::model()->updateByPk($post['id'],array('delete'=>1));
+    }
 
     public static function criteriaForGetMyRating(){
         $criteria = new CDbCriteria;

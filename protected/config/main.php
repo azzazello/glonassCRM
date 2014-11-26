@@ -154,6 +154,6 @@ return array(
             "from" => "robot@bp-sever.ru", //от кого info@osb-plywood.ru
             "charset" => "UTF-8", //от кого
         ),
-        'service'=>array('url'=>'http://192.168.0.224:9994')
+        'service'=>array('url'=>'http://192.168.2.4:9994')
     )
 );

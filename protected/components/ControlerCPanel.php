@@ -13,7 +13,7 @@ class ControlerCPanel extends CController
     public $true = '//ajaxOk';
     public $false = '//ajaxERROR';
     public $pagination;
-    const PAGE_SIZE = 4;
+    const PAGE_SIZE = 10;
     public $criteria;
 
 
@@ -28,7 +28,6 @@ class ControlerCPanel extends CController
         if (Yii::app()->user->isGuest){
             $this->redirect($this->createUrl( "../login" ));
         }
-
         $filterChain->run();
         return true;
     }

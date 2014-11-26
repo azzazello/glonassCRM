@@ -22,26 +22,7 @@ class RatingController extends ControlerCPanel
         $this->comments = Rating::getMyComments();
         $this->render('comments');
     }
-    public function actiondeleteRating(){
-        if(Yii::app()->request->isAjaxRequest){
-            $result = Rating::deleteRating($_POST['id'])?'true':'false';
-            $this->renderPartial($this->$result);
-        }
-    }
 
-    public function actionsaveRating(){
-        if(Yii::app()->request->isAjaxRequest){
-            $result = Rating::editRating($_POST)?'true':'false';
-            $this->renderPartial($this->$result);
-        }
-    }
-
-    public function actioneditRating(){
-        if(Yii::app()->request->isAjaxRequest){
-            if(!$rating = Rating::getRecordForEdit($_POST['id'])) $this->renderFalse();
-            $this->renderPartial('render/edit',array('rating'=>$rating));
-        }
-    }
 
 
 }

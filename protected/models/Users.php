@@ -58,7 +58,7 @@ class Users extends BaseUsers
     }
 
     public static  function getCurrUser(){
-        return 1;
+        return Yii::app()->user->getId();
     }
 
     public function editProfile(){
