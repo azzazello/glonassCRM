@@ -16,6 +16,15 @@ class ControlerCPanel extends CController
     const PAGE_SIZE = 10;
     public $criteria;
 
+    public $occupation = array(
+        0=>"Не выбрано",
+        1=>"Водитель",
+        2=>"Диспетчер",
+        3=>"Владелец автопредприятия",
+        4=>"Заказчик перевозки",
+        99=>"Другое"
+    );
+
 
     public function filters()
     {

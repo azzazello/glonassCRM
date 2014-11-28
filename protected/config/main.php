@@ -116,11 +116,11 @@ return array(
         ),
 
         'db'=>array(
-            'connectionString' => 'mysql:host=192.168.0.89;dbname=zernovoz',
-           // 'connectionString' => 'mysql:host=192.168.0.224;dbname=glonass',
+            //'connectionString' => 'mysql:host=192.168.0.89;dbname=zernovoz',
+            'connectionString' => 'mysql:host=192.168.0.224;dbname=glonass',
             'emulatePrepare' => true,
-         //   'username' => 'misha',
-            'username' => 'root',
+            'username' => 'misha',
+           // 'username' => 'root',
             'password' => '1111',
             'charset' => 'cp1251',
         ),

@@ -5,7 +5,7 @@
         </a>
         <div class="media-body">
             <h4 class="media-heading"><?=Yii::app()->user->name;?></h4>
-            <small class="text-muted">диспетчер</small>
+            <small class="text-muted"><?=$this->occupation[ Yii::app()->user->occupation ];?></small>
         </div>
     </div><!-- media -->
 
