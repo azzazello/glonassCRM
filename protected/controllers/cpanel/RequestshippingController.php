@@ -40,10 +40,10 @@ class RequestshippingController extends ControlerCPanel
               //  $object = new RequestShipping();
                 $notification = array(
                 'Id' =>$object->id,
-                'Culture'=>$object->culure->culture,
-                'Price'=>$object->price,
-                'From'=>$object->region_load_text,
-                'To'=>$object->regionUnload->name.", ".$object->stevedore->name
+                'Culture'=>iconv("windows-1251","UTF-8",$object->culure->culture),
+                'Price'=>iconv("windows-1251","UTF-8",$object->price),
+                'From'=>iconv("windows-1251","UTF-8",$object->region_load_text),
+                'To'=>iconv("windows-1251","UTF-8",$object->regionUnload->name.", ".$object->stevedore->name)
             );
                 //print_r($notification);
                 $notification_result = Forwebservices::newRequestShipping($notification);
