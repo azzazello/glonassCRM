@@ -2,7 +2,7 @@
     <div class="panel panel-signup">
         <div class="panel-body">
             <div class="logo text-center">
-                <img src="<?=Yii::app()->request->baseUrl;?>/images/logo-primary.png" alt="Логотип" >
+                <a href="<?=Yii::app()->request->baseUrl;?>" ><img src="<?=Yii::app()->request->baseUrl;?>/images/front/logofront.png" alt="Логотип" ></a>
             </div>
             <br />
             <h4 class="text-center mb5">Смена пароля</h4>

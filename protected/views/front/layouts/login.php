@@ -37,7 +37,7 @@
 <script src="<?=Yii::app()->request->baseUrl;?>/js/modernizr.min.js"></script>
 <script src="<?=Yii::app()->request->baseUrl;?>/js/pace.min.js"></script>
 
-<script src="<?=Yii::app()->request->baseUrl;?>/js/retina.min.js"></script>
+<!--<script src="<?=Yii::app()->request->baseUrl;?>/js/retina.min.js"></script>-->
 <script src="<?=Yii::app()->request->baseUrl;?>/js/jquery.cookies.js"></script>
 <script src="<?=Yii::app()->request->baseUrl;?>/js/select2.min.js"></script>
 <script src="<?=Yii::app()->request->baseUrl;?>/js/select2_locale_ru.js"></script>

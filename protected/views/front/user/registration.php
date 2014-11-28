@@ -4,7 +4,7 @@
     <div class="panel panel-signup">
         <div class="panel-body">
             <div class="logo text-center">
-                <img src="<?=Yii::app()->request->baseUrl;?>/images/logo-primary.png" alt="Chain Logo" >
+                <a href="<?=Yii::app()->request->baseUrl;?>" ><img src="<?=Yii::app()->request->baseUrl;?>/images/front/logofront.png" alt="Логотип" ></a>
             </div>
             <br />
             <h4 class="text-center mb5">Регистрация</h4>
@@ -70,7 +70,7 @@
                     <div class="col-sm-6">
                         <div class="input-group mb15">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                            <input type="text" class="form-control" value="" name="email" id="email" placeholder="Email *">
+                            <input type="text" class="form-control" value="" name="email" id="email" placeholder="Email">
                         </div><!-- input-group -->
                                 <div class="error_registration email_error"></div>
                     </div>
@@ -122,7 +122,7 @@
 
         </div>
         <div class="panel-footer">
-            <a href="<?=$this->createUrl("/login");?>" class="btn btn-primary btn-block">Войти</a>
+            <!--<a href="<?=$this->createUrl("/login");?>" class="btn btn-primary btn-block">Войти</a>-->
             <a href="<?=Yii::app()->request->baseUrl;?>" class="btn btn-primary btn-block">На главную</a>
         </div><!-- panel-footer -->
 

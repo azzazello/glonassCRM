@@ -10,7 +10,7 @@ class Trader extends BaseTrader
 
     public static function getAll() {
 
-        $result = Trader::model()->findAll(array("order"=>"firm"));
+        $result = Trader::model()->findAll(array("condition"=>"status=1", "order"=>"firm"));
         $array = array();
         foreach($result as $val) {
             $array[$val->id] = $val->firm;

@@ -8,7 +8,7 @@
             <div style="padding-top: 30px"></div>
         <div class="textMain">fsdfasd fds fasd fasdf asdf asfas fa asdfsdfasd fds fasd fasdf asdf asfas fa asdfsdfasd fds fasd fasdf asdf asfas fa asdfsdfasd fds fasd fasdf asdf asfas fa asdfsdfasd fds fasd fasdf asdf asfas fa asdfsdfasd fds fasd fasdf asdf asfas fa asdfsdfasd fds fasd fasdf asdf asfas fa asdfsdfasd fds fasd fasdf asdf asfas fa asdfsdfasd fds fasd fasdf asdf asfas fa asd</div>
 
-            <?$this->renderPartial("application.views.front.extend.misha")?>
+
 
 
         </td>

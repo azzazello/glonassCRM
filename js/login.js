@@ -1,22 +1,7 @@
 
-
-
-
-
-
     function messageFail(text,cl){
         $("."+cl).html(text);
         return false;
-    }
-
-    function checkLoginData(){
-        if(!$("#loginLogin").val().length){
-            bootbox.alert('Введите логин'); return false;
-        }
-        if(!$("#loginPassword").val().length){
-            bootbox.alert('Введите пароль'); return false;
-        }
-        return true;
     }
 
     function sendForgotPassword(){
@@ -51,10 +36,6 @@ $(document).ready(function(){
 
     $("input[type='password']").val("");
 
-    $("#loginSubmit").click(function(){
-        if(!checkLoginData()) return false;
-        $("#loginForm").submit();
-    });
 
     function doublePassword(){
         return ($('#passwordForm').val()!=$('#passwordFormRepeat').val())?false:true;
@@ -63,10 +44,11 @@ $(document).ready(function(){
     // Отображение input восстановления пароля
 
     $(".forgotPassword").click(function(){
-        if($(".forgotPasswordDiv").css('display')=='none'){
+       /* if($(".forgotPasswordDiv").css('display')=='none'){
             $(".forgotPasswordDiv").fadeIn();
             $(this).text('Восстановить');
-        }else sendForgotPassword();
+        }else */
+            sendForgotPassword();
     });
 
     function doubleLogin(){ //Проверка на дубляж логина
@@ -117,7 +99,7 @@ $(document).ready(function(){
         if( $("#login").val().length==0 ) { showErrorMessage('login_error',"Поле Логин обязательно для заполнения"); status = false; }
         if( $("#passwordForm").val().length==0 ) { showErrorMessage('password_error',"Поле Пароль обязательно для заполнения"); status = false; }
         if( $("#passwordForm").val().length<5 ) { showErrorMessage('password_error',"Поле Пароль должно быть длинее 4 символов"); return false; }
-        if( $("#email").val().length ==0 ) { showErrorMessage('email_error',"Поле Пароль обязательно для заполнения"); status = false; }
+        // if( $("#email").val().length ==0 ) { showErrorMessage('email_error',"Поле Пароль обязательно для заполнения"); status = false; }
         return status;
     }
 
@@ -151,7 +133,6 @@ $(document).ready(function(){
     }
 
     $("#repeatSmS").click(function(){
-        // phone = "+7 (918) 48-68-904";
         $.post(url+"/Ajax/SendCodeRequest",{phone:phone},function(data){
             if(data=='true'){
                 bootbox.alert('Код подтверждения выслан повторно');
@@ -162,7 +143,7 @@ $(document).ready(function(){
     $("#code").click(function(){
         $.post(url+"/Ajax/confirmAccount",{phone:phone,code:$(".confirmAccountCode").val()},function(data){
             if(data=='true'){
-                location.href = url+"/login/index?save=registrationOk";
+                location.href = url+"/?save=registration";
             }else bootbox.alert('Не верный код подтверждения');
         });
     });
@@ -183,7 +164,9 @@ $(document).ready(function(){
         }
     });
 
-
+    $("#passwordForm,#passwordFormRepeat").keyup(function(){
+        $(this).val( $(this).val().replace(/[\s]/g, '') );
+    });
 
     $("#repeatPassword").click(function(){
         if( $("#password").val().length==0 ) { showErrorMessage('password_error',"Поле Новый пароль обязательно для заполнения"); return false; }

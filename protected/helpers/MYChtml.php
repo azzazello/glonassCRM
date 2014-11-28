@@ -68,8 +68,9 @@ class MYChtml extends  CHtml
     public static function bootboxAlert($v){
         switch ($v){
             case 'recovery': return 'Ссылка восстановления пароля не верна, пройдите процедуру восстановления еще раз'; break;
-            case 'registrationOk': return 'Регистрация прошла успешно'; break;
+            case 'registration': return 'Регистрация прошла успешно'; break;
             case 'ok': return 'Сохранено успешно'; break;
+            case 'login': return 'Вы ввели не верный логин или пароль'; break;
         }
     }
 

@@ -211,7 +211,7 @@
         });
 
 
-            $(".confirm").live("click",function(){
+            $(".confirm").on("click",function(){
                 var id = $(this).attr("data-rel");
                 var idRequest = $(this).attr("data-content");
                 var phone = $(this).attr("data-category");
@@ -220,7 +220,7 @@
             });
 
 
-            $(".unconfirm").live("click",function(){
+            $(".unconfirm").on("click",function(){
                 var id = $(this).attr("data-rel");
                 var idRequest = $(this).attr("data-content");
                 var phone = $(this).attr("data-category");
@@ -229,7 +229,7 @@
             });
 
 
-            $(".deletereply").live("click",function(){
+            $(".deletereply").on("click",function(){
                 var id = $(this).attr("data-rel");
 
                 if (confirm("¬ы действительно хотите удалить этот ответ?"))  {

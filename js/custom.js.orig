@@ -19,6 +19,7 @@ jQuery(document).ready(function() {
         $(this).val( $(this).val().replace(",","."));
     });
 
+<<<<<<< HEAD
     $("#add_trader").click(function(){
         if($(this).hasClass("save_trader")) saveTrader();
         $(this).html("cохранить").addClass("save_trader");
@@ -49,6 +50,9 @@ jQuery(document).ready(function() {
     }
 
 });
+=======
+
+});
 
 
 
@@ -59,3 +63,4 @@ $(".locked").show();
 function unLocked() {
     $(".locked").hide();
 }
+>>>>>>> 80511b6e8025ef72f8ea667e4afbb084181508cb

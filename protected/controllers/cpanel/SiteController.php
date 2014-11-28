@@ -13,6 +13,4 @@ class  SiteController extends ControlerCPanel
         $this->render('index');
     }
 
-
-
 }

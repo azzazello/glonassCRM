@@ -6,7 +6,6 @@ class Users extends BaseUsers
 {
     public $Model;
     public $data;
-
     public $post;
     public $model;
     public $oldpassword = false;
@@ -19,6 +18,7 @@ class Users extends BaseUsers
     {
         return array(
             'requestShippings' => array(self::HAS_MANY, 'RequestShipping', 'user_id'),
+            'MobileUserRole' => array(self::HAS_ONE, 'MobileUserRole', 'user_id')
         );
     }
 
@@ -46,15 +46,19 @@ class Users extends BaseUsers
     }
 
     public static function checkDoubleLogin($login){
-        return Users::model()->resetScope()->count("login=:login",array(":login"=>AccessoryFunctions::clearTel($login)));
+        return Users::model()->resetScope()->count("login=:login and confirm=1",array(":login"=>AccessoryFunctions::clearTel($login)));
     }
 
-    public static function checkDoubleEmail($email){
-        return Users::model()->resetScope()->count("email=:email",array(":email"=>$email));
+    public static function checkDoubleEmail($email,$edit = 0){
+        $criteria = new CDbCriteria;
+        $criteria->condition = "email=:email";
+        if((int)$edit) $criteria->addCondition("id!=".Yii::app()->user->getId());
+        $criteria->params = array(":email"=>$email);
+        return Users::model()->resetScope()->count($criteria);
     }
 
     public static  function getCurrUser(){
-        Yii::app()->user->id;
+        return Yii::app()->user->getId();
     }
 
     public function editProfile(){
