@@ -32,7 +32,7 @@ blockquote {
 .testimonial blockquote:before {
     right: 30px;
     bottom: -15px;
-    content: '?';
+    content: ';';
 }
 
 .testimonial blockquote:after, .testimonial blockquote:before {
@@ -75,5 +75,5 @@ blockquote {
     line-height: 30px;
     font-style: normal;
     text-align: center;
-    content: '&#10077;';
+    content: '"';
 }

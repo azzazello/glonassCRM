@@ -30,4 +30,19 @@ class MainController extends Controller
 
     public function getErrors() {}
 
+
+    public  function actionPlans(){
+
+        $this->render("plans");
+    }
+
+    public function actionContacts() {
+        $this->render("contacts");
+
+    }
+
+    public function actionOrders() {
+        $result = RequestShipping::model()->findAll();
+        $this->render("list",array("result"=>$result));
+    }
 }

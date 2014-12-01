@@ -86,5 +86,35 @@ class RequestShipping extends BaseRequestShipping
 
     }
 
+    public static function countRequestAmountMoney(){
+        $result = RequestShipping::model()->findAll();
+        $sum = 0;
+        foreach ($result as $value) {
+            //$value = new RequestShipping();
+            $sum += (($value->weight*1000))*$value->price;
+        }
+        return MYChtml::numberFormat($sum);
+    }
+
+    public static function countRequestAmountMoneyYesterday(){
+        $result = RequestShipping::model()->findAll("DATE(date_create) = DATE(now())");
+        $sum = 0;
+        foreach ($result as $value) {
+            //$value = new RequestShipping();
+            $sum += (($value->weight*1000))*$value->price;
+        }
+        return MYChtml::numberFormat($sum);
+    }
+
+    public static function countRequestAmountMoneyWeekly(){
+        $result = RequestShipping::model()->findAll("DATE(date_create) >= DATE(CURDATE()-WEEKDAY(CURDATE()))");
+        $sum = 0;
+        foreach ($result as $value) {
+            //$value = new RequestShipping();
+            $sum += (($value->weight*1000))*$value->price;
+        }
+        return MYChtml::numberFormat($sum);
+    }
+
 
 }

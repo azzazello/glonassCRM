@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Chain Responsive Bootstrap3 Admin</title>
+    <title>Зерновозам.ru</title>
 
     <link href="<?=Yii::app()->request->baseUrl;?>/css/style.default.css" rel="stylesheet">
     <link href="<?=Yii::app()->request->baseUrl;?>/css/front.css" rel="stylesheet">
@@ -56,11 +56,11 @@
 
     <div class="menu">
         <ul>
-            <li class="fe-main"><a href="1">Главная</a></li>
-            <li class="fe-plan"><a href="1">Планы</a></li>
-            <li class="feinfo"><a href="1">Информация</a></li>
-            <li class="fe-actual"><a href="1">Актуальные заявки</a></li>
-            <li class="fe-contact"><a href="1">Контакты</a></li>
+            <li class="fe-main"><a href="<?=$this->createUrl("/index.php");?>">Главная</a></li>
+            <li class="fe-plan"><a href="<?=$this->createUrl("/main/plans");?>">Планы</a></li>
+            <li class="fe-info"><a href="<?=$this->createUrl("/main/plans");?>">Информация</a></li>
+            <li class="fe-actual"><a href="<?=$this->createUrl("/main/orders");?>">Актуальные заявки</a></li>
+            <li class="fe-contact"><a href="<?=$this->createUrl("/main/contacts");?>">Контакты</a></li>
         </ul>
     </div>
     </div>
@@ -76,7 +76,7 @@
 
 <div class="footer" id="footer">
     <div class="footerContainer">
-fsd asd fasdf asd
+        Контактные данные: <a mailto="info@port-tranzit.ru" class="">email для связи</a>
     </div>
     <?=MYChtml::showMessage($_GET);?>
 </div>

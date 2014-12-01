@@ -7,18 +7,18 @@
                 </div><!-- panel-btns -->
                 <div class="panel-icon"><i class="fa fa-dollar"></i></div>
                 <div class="media-body">
-                    <h5 class="md-title nomargin">Today's Earnings</h5>
-                    <h1 class="mt5">$8,102.32</h1>
+                    <h5 class="md-title nomargin">Размещено заявок на</h5>
+                    <h1 class="mt5"><b><?=RequestShipping::countRequestAmountMoney()?> р</b></h1>
                 </div><!-- media-body -->
                 <hr>
                 <div class="clearfix mt20">
                     <div class="pull-left">
-                        <h5 class="md-title nomargin">Yesterday</h5>
-                        <h4 class="nomargin">$29,009.17</h4>
+                        <h5 class="md-title nomargin">Сегодня</h5>
+                        <h4 class="nomargin"><b><?=RequestShipping::countRequestAmountMoneyYesterday()?> р</b></h4>
                     </div>
                     <div class="pull-right">
-                        <h5 class="md-title nomargin">This Week</h5>
-                        <h4 class="nomargin">$99,103.67</h4>
+                        <h5 class="md-title nomargin">Неделя</h5>
+                        <h4 class="nomargin"><?=RequestShipping::countRequestAmountMoneyWeekly()?> р</h4>
                     </div>
                 </div>
 
@@ -34,18 +34,18 @@
                 </div><!-- panel-btns -->
                 <div class="panel-icon"><i class="fa fa-users"></i></div>
                 <div class="media-body">
-                    <h5 class="md-title nomargin">New User Accounts</h5>
-                    <h1 class="mt5">138,102</h1>
+                    <h5 class="md-title nomargin">Всего пользователей</h5>
+                    <h1 class="mt5"><?=Users::countAllUsers()?></h1>
                 </div><!-- media-body -->
                 <hr>
                 <div class="clearfix mt20">
                     <div class="pull-left">
                         <h5 class="md-title nomargin">Yesterday</h5>
-                        <h4 class="nomargin">10,009</h4>
+                        <h4 class="nomargin"><?=Users::countAllUsersYesterday()?></h4>
                     </div>
                     <div class="pull-right">
                         <h5 class="md-title nomargin">This Week</h5>
-                        <h4 class="nomargin">178,222</h4>
+                        <h4 class="nomargin"><?=Users::countAllUsersWeekly()?></h4>
                     </div>
                 </div>
 
@@ -61,18 +61,18 @@
                 </div><!-- panel-btns -->
                 <div class="panel-icon"><i class="fa fa-pencil"></i></div>
                 <div class="media-body">
-                    <h5 class="md-title nomargin">New User Posts</h5>
-                    <h1 class="mt5">153,900</h1>
+                    <h5 class="md-title nomargin">Ответов водителей</h5>
+                    <h1 class="mt5"><?=ReplyShipping::countAllReply()?></h1>
                 </div><!-- media-body -->
                 <hr>
                 <div class="clearfix mt20">
                     <div class="pull-left">
                         <h5 class="md-title nomargin">Yesterday</h5>
-                        <h4 class="nomargin">144,009</h4>
+                        <h4 class="nomargin"><?=ReplyShipping::countAllReplyYesterday()?></h4>
                     </div>
                     <div class="pull-right">
                         <h5 class="md-title nomargin">This Week</h5>
-                        <h4 class="nomargin">987,212</h4>
+                        <h4 class="nomargin"><?=ReplyShipping::countAllReplyWeekly()?></h4>
                     </div>
                 </div>
 

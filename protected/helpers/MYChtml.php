@@ -78,6 +78,11 @@ class MYChtml extends  CHtml
         return AccessoryFunctions::showDate($val);
     }
 
+    public  static  function  numberFormat($obj) {
+
+        return number_format($obj, 0, ',', ' ');
+    }
+
 
         public static function showMessage($get){
         if(empty($get)) return false;

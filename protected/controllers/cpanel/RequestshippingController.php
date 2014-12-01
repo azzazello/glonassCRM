@@ -66,7 +66,7 @@ class RequestshippingController extends ControlerCPanel
 
     }
 
-	public  function  createRequest() {
+	public  function  createOrders() {
         $request = New RequestShipping();
         $result = RequestShipping::add($_POST,$request);
 

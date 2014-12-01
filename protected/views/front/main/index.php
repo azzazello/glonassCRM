@@ -1,15 +1,21 @@
-<div class="path">√лавна€</div>
+<div class="path" xmlns="http://www.w3.org/1999/html">√лавна€</div>
 <div style="padding-top: 90px"></div>
 <table class="contentOnMain">
     <tr>
         <td class="leftColumn"><img src="<?=Yii::app()->request->baseUrl;?>/images/front/mans.png"></td>
         <td class="rightColumn">
-            <h1>¬с€ херн€</h1>
+            <h1>—ервис дл€ поиска водителей зерновозов.</h1>
             <div style="padding-top: 30px"></div>
-        <div class="textMain">fsdfasd fds fasd fasdf asdf asfas fa asdfsdfasd fds fasd fasdf asdf asfas fa asdfsdfasd fds fasd fasdf asdf asfas fa asdfsdfasd fds fasd fasdf asdf asfas fa asdfsdfasd fds fasd fasdf asdf asfas fa asdfsdfasd fds fasd fasdf asdf asfas fa asdfsdfasd fds fasd fasdf asdf asfas fa asdfsdfasd fds fasd fasdf asdf asfas fa asdfsdfasd fds fasd fasdf asdf asfas fa asd</div>
+        <div class="textMain">
+            <p>ћы рады представить вам новый сервис дл€ поиска водителей зверновозов. Ќа данный момент мы работаем в тестовом режиме и будем благодарны вам за помощь в поиске ошибок и новых идей дл€ нашего сервиса.</p>
+            <p><b>— помощью нашего сервиса</b> вы сможете подать за€вку на перевозку, указав данные необходимые дл€ прин€ти€ решени€ о перевозки водителем зерновоза. ƒанные по вашей за€вке сразу после размещени€ будут доступны дл€ водителей в специальном мобильном приложении. </p>
+               <p><b>ћобильное приложение</b> используетс€ водител€ми дл€ работы в порту Ќовороссийск (более подробно о приложении и дл€ чего оно необходимо вы можете ознакомитьс€ на сайте <a href="http://www.port-tranzit.ru">port-tranzit.ru</a>), приложение имеет большое распространение.  оличество установленных приложений на данный момент составл€ет более 900 (все водители зерновозов <b>оборудованных √ЋќЌј——</b>) и с каждый день эта цифра увеличиваетс€  не менее чем на 10. Ќиже приведен актуальный счетчик установленных приложений.</p>
+                <p><b>ѕользователи зарегистрированные в мобильном приложении</b> могут зайти в панель нашего сервиса по учетным данным  мобильного приложени€.</p>
+               <p>Ќа ближайшее врем€ сервис €вл€етс€ <b>абсолютно бесплатным</b> и может использоватьс€ любым зарегистрированным пользователем.</p>
+        </div>
 
-
-
+<br>
+            <h2>—ервис работает в тестовом режиме!</h2>
 
         </td>
     </tr>

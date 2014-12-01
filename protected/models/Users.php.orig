@@ -58,7 +58,11 @@ class Users extends BaseUsers
     }
 
     public static  function getCurrUser(){
+<<<<<<< HEAD
+        Yii::app()->user->id;
+=======
         return Yii::app()->user->getId();
+>>>>>>> 6ded223e69aec5505531b706e99b9b08fcab6270
     }
 
     public function editProfile(){
@@ -67,19 +71,5 @@ class Users extends BaseUsers
         $this->Model->login = AccessoryFunctions::clearTel( $this->data['login'] );
         return $this->Model->save();
     }
-
-    public static function countAllUsers(){
-        return Users::model()->count();
-    }
-
-    public static function countAllUsersYesterday(){
-        return Users::model()->count();
-    }
-
-    public static function countAllUsersWeekly(){
-
-    }
-
-
 
 }
