@@ -116,23 +116,16 @@ return array(
         ),
 
         'db'=>array(
-            'connectionString' => 'mysql:host=192.168.0.89;dbname=zernovoz',
+            'connectionString' => 'mysql:host=192.168.2.104;dbname=glonass_crm',
             //'connectionString' => 'mysql:host=192.168.0.224;dbname=glonass',
             'emulatePrepare' => true,
-            'username' => 'root',
+            'username' => 'all',
            // 'username' => 'root',
             'password' => '1111',
             'charset' => 'cp1251',
         ),
 
-        'igor'=>array(
-            'class' => 'system.db.CDBConnection',
-            'connectionString' => 'mysql:host=192.168.2.104;dbname=zernovoz',
-            'emulatePrepare' => true,
-            'username' => 'all',
-            'password' => '1111',
-            'charset' => 'cp1251',
-        )
+
 
     ),
 

@@ -28,9 +28,9 @@ class ControlerCPanel extends CController
 
     public function filters()
     {
-        return array(
+      /*  return array(
             'checkAccess'
-        );
+        ); */
     }
 
     public  function  filterCheckAccess($filterChain){

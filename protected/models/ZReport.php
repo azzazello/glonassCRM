@@ -1,8 +1,8 @@
 <?php
 
-Yii::import('application.models._base.BaseTruck');
+Yii::import('application.models._base.BaseZReport');
 
-class Truck extends BaseTruck
+class ZReport extends BaseZReport
 {
 	public static function model($className=__CLASS__) {
 		return parent::model($className);

@@ -41,116 +41,71 @@
 
 
 
-    <div class="form-group">
-    <label class="col-sm-4 control-label">Выберите регион</label>
-    <div class="col-sm-8">
-        <?echo FormHTML::select($all_region,"regions","regions","Выберите регион");?>
-    </div>
-    </div>
+
 
     <div class="form-group">
-        <label class="col-sm-4 control-label">Выберите населенный пункт</label>
+        <label class="col-sm-4 control-label">Дата платежа(z отчета):</label>
         <div class="col-sm-8">
-            <?echo FormHTML::inputSelect2("locality","locality","Выберите населенный пункт");?>
+            <input class="form-control maskdate" name='date' >
+        </div>
+    </div>
+
+
+
+
+    <div class="form-group">
+        <label class="col-sm-4 control-label">Номер машины:</label>
+        <div class="col-sm-8">
+            <input value="" name="plate" id="plate" class="form-control">
+        </div>
+    </div>
+
+
+
+
+    <div class="form-group newtruck" style="display: none" >
+        <label class="col-sm-4 control-label">ФИО:</label>
+        <div class="col-sm-8">
+            <input name="fio" id="fio" class="float  form-control">
+        </div>
+    </div>
+
+    <div class="form-group newtruck" style="display: none" >
+        <label class="col-sm-4 control-label">Абонентка тип:</label>
+        <div class="col-sm-8">
+            <select name="weight" id="fsdfsd2" class="float  form-control">
+                <option value="10">300 в мес</option>
+                <option value="6.67">200 в мес</option>
+                <option value="5.48">2000 в год</option>
+                <option value="0">Без абонентки</option>
+            </select>
         </div>
     </div>
 
 
     <div class="form-group">
-        <label class="col-sm-4 control-label">Дата закрытия получения заявок:</label>
+        <label class="col-sm-4 control-label">Сумма установка:</label>
         <div class="col-sm-8">
-            <input class="datepicker form-control" name='date_end'>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="col-sm-4 control-label">Дата начала погрузки:</label>
-        <div class="col-sm-8">
-            <input  class="datepicker  form-control" value="" name="date_load" id="date_load">
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="col-sm-4 control-label">Выберите регион выгрузки:</label>
-        <div class="col-sm-8">
-            <?echo FormHTML::select(RegionUnload::getAll(),"regionUnload","regionUnload","Выберите регион выгрузки");?>
+            <input name="amount_installation" id="amount_installation" class="float  form-control">
         </div>
     </div>
 
 
     <div class="form-group">
-        <label class="col-sm-4 control-label">Выберите стивидора:</label>
+        <label class="col-sm-4 control-label">Сумма Абонентка:</label>
         <div class="col-sm-8">
-            <?echo FormHTML::select(array(),"stevedore","stevedore","Выберите регион выгрузки");?>
+            <input name="amount_fee_license" id="amount_fee_license" class="float  form-control">
         </div>
     </div>
 
 
-    <div class="form-group">
-        <label class="col-sm-4 control-label">Расстояние,км:</label>
-        <div class="col-sm-8">
-            <input value="" name="distance" id="distance" class="form-control">
-        </div>
-    </div>
 
-    <div class="form-group">
-        <label class="col-sm-4 control-label">Выберите Культуру:</label>
-        <div class="col-sm-8">
-            <?=FormHTML::select(Culture::getAll(),"culture","culture","Выберите культуру");?>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="col-sm-4 control-label">Выберите Трейдера:</label>
-        <div class="col-sm-8">
-            <?=FormHTML::select(Trader::getAll(),"trader","trader","Выберите трейдера");?>
-            <br>
-            <input name="" id="add_trader_input" class="form-control" placeholder="Введите название Трейдера">
-            <br>
-            <a href="#" id="add_trader">добавить</a>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="col-sm-4 control-label">Цена перевозки, руб/кг:</label>
-        <div class="col-sm-8">
-            <input name="price" id="price" class="float  form-control">
-        </div>
-    </div>
 
 
     <div class="form-group">
-        <label class="col-sm-4 control-label">Грузподъемность весов на погрузке, тонн:</label>
+        <label class="col-sm-4 control-label">Комментарий<div style="color: #808080">укажите важную информацию по перевозке</div></label>
         <div class="col-sm-8">
-            <input name="scale" id="scale" class="form-control">
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="col-sm-4 control-label">Способ погрузки:</label>
-        <div class="col-sm-8">
-            <?=FormHTML::select(LoadType::getAll(),"load_type","load_type","Выберите способ погрузки");?>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="col-sm-4 control-label">Объем перевозки, тонн:</label>
-        <div class="col-sm-8">
-            <input name="weight" id="weight" class="float  form-control">
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="col-sm-4 control-label">Где расчет:</label>
-        <div class="col-sm-8">
-            <input type="text" value="" name='where_calculation' id="where_calculation" class="form-control"><a href="#" id="uncash">перечислением</a>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="col-sm-4 control-label">Дополнительное описание<div style="color: #808080">укажите важну информацию по перевозке</div></label>
-        <div class="col-sm-8">
-            <textarea id="autoResizeTA"  name = "description" class="form-control" rows="5"></textarea>
+            <textarea id="comment"  name = "comment" class="form-control" rows="5"></textarea>
         </div>
     </div><!-- form-group -->
 
@@ -182,66 +137,19 @@
         jQuery("#regions").removeClass("form-control");
         jQuery('#regions').select2();
         jQuery('select.select2').select2();
+        $("#plate").blur(function(){
+            $.get("<?=$this->createUrl("/ajax/checkplate")?>",{"plate":$(this).val()},function(data){
 
-
-        jQuery('.toggle').toggles({off: true,text:{on:"ДА",off:"НЕТ"}});
-        jQuery('#regions').on("select2-selecting",function(data){
-            jQuery("#locality").removeClass("form-control");
-            $("#locality").attr("disabled",false);
-            $("#locality").select2({
-                placeholder : "Введите название населенного пункта",
-                minimumInputLength: 3,
-                ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
-                    url: "<?=$this->createUrl("/ajax/locality")?>?code="+data.val,
-                    dataType: 'json',
-                    data: function (term, page) {
-                        return {
-                            name: term // search term
-
-                        };
-                    },
-                    results: function (data, page) { // parse the results into the format expected by Select2.
-                        // since we are using custom formatting functions we do not need to alter remote JSON data
-
-                        return {results: data};
-                    }
+                if (data == "false") {
+                    $(".newtruck").show("fast");
+                } else {
+                    $(".newtruck").hide("fast");
                 }
+
             });
 
         });
-
-        $("#price").blur(function(){
-
-           if ($(this).val() > 10){
-               alert("Цена перевозки указана не верно. Обратите внимание что указывается руб/кг, а не за тонну. Например если цена перевозки составляет 800 руб/тонн, то вы должны указать 0.8. Знак разделитель дробной части может быть как запятая, так и точка.")
-               $("#price").focus();
-           }
-        });
-
-        $("#regionUnload option[value='0']").attr("selected","selected");
-        $("#stevedore").attr("disabled",true);
-        $("#regionUnload").change(function(){
-            id = $(this).val();
-            if (id == 0) {$("#stevedore option[value!=0]").remove(); return false;}
-            $.post("<?=$this->createUrl("/ajax/stevedore")?>",{"id":id},function(data){
-                $("#stevedore").attr("disabled",false);
-
-
-
-                $("#stevedore option[value!=0]").remove();
-                for(i = 0; i < data.length; i++){
-                    $("#stevedore").append( $('<option value="'+data[i].id+'">'+data[i].name+'</option>'));
-                }
-            }, "json");
-
-        });
-
-        $("#uncash").click(function(){
-           //$("#where_calculation").attr("readonly",true);
-            $("#where_calculation").val("перечислением");
-            return false;
-
-        });
+        $(".maskdate").mask("9999-99-99");
     });
 
 </script>

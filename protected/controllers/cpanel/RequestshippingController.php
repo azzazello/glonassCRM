@@ -32,31 +32,10 @@ class RequestshippingController extends ControlerCPanel
     public function actionCreate()
     {
 
-        If ($_GET["select"] == 1) {
 
-           $result = $this->createRequest();
-            if ($result["result"] == "noerror") {
-                $object = $result["object"];
-              //  $object = new RequestShipping();
-                $notification = array(
-                'Id' =>$object->id,
-                'Culture'=>iconv("windows-1251","UTF-8",$object->culure->culture),
-                'Price'=>iconv("windows-1251","UTF-8",$object->price),
-                'From'=>iconv("windows-1251","UTF-8",$object->region_load_text),
-                'To'=>iconv("windows-1251","UTF-8",$object->regionUnload->name.", ".$object->stevedore->name)
-            );
-                //print_r($notification);
-                $notification_result = Forwebservices::newRequestShipping($notification);
-                if ($notification_result != "true")
-                 echo iconv("UTF-8","windows-1251",$notification_result);
-                 /// Логировать ошибку надо
-            }
 
-        }
 
-        $all_region = Kladr::getRegions(true);
-
-        $this->render('create',array("all_region"=>$all_region,"select"=>(int)$_GET["select"],"result"=>$result));
+        $this->render('create');
     }
 
     public function actionList() {
@@ -66,7 +45,7 @@ class RequestshippingController extends ControlerCPanel
 
     }
 
-	public  function  createOrders() {
+	public  function  createRequest() {
         $request = New RequestShipping();
         $result = RequestShipping::add($_POST,$request);
 

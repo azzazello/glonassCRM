@@ -29,3 +29,6 @@ li.selected a{
     background-color: #428BCA !important;
     color: white  !important;
 }
+
+.isCloseInstallation0 {background-color: rgba(255, 0, 0, 0.38) !important;}
+.isCloseInstallation1 {background-color: transparent}

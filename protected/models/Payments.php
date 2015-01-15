@@ -1,8 +1,8 @@
 <?php
 
-Yii::import('application.models._base.BaseStatus');
+Yii::import('application.models._base.BasePayments');
 
-class Status extends BaseStatus
+class Payments extends BasePayments
 {
 	public static function model($className=__CLASS__) {
 		return parent::model($className);
