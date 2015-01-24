@@ -11,7 +11,7 @@
  *
  * @property integer $id
  * @property string $plate
- * @property integer $daily_license_fee
+ * @property double $daily_license_fee
  * @property string $fio
  * @property integer $is_act
  * @property integer $is_conctract
@@ -20,8 +20,11 @@
  * @property integer $balance_license_fee
  * @property string $comment
  * @property integer $installation_is_close
+ * @property integer $type
  *
+ * @property LicenseDailyFeeAmountByCar[] $licenseDailyFeeAmountByCars
  * @property Payments[] $payments
+ * @property Glonass $glonass
  */
 abstract class BaseTrucks extends GxActiveRecord {
 
@@ -44,17 +47,20 @@ abstract class BaseTrucks extends GxActiveRecord {
 	public function rules() {
 		return array(
 			array('plate, daily_license_fee', 'required'),
-			array('daily_license_fee, is_act, is_conctract, balance_license_fee, installation_is_close', 'numerical', 'integerOnly'=>true),
+			array('is_act, is_conctract, balance_license_fee, installation_is_close, type', 'numerical', 'integerOnly'=>true),
+			array('daily_license_fee', 'numerical'),
 			array('plate, contract_number, act_number', 'length', 'max'=>25),
 			array('fio, comment', 'safe'),
-			array('fio, is_act, is_conctract, contract_number, act_number, balance_license_fee, comment, installation_is_close', 'default', 'setOnEmpty' => true, 'value' => null),
-			array('id, plate, daily_license_fee, fio, is_act, is_conctract, contract_number, act_number, balance_license_fee, comment, installation_is_close', 'safe', 'on'=>'search'),
+			array('fio, is_act, is_conctract, contract_number, act_number, balance_license_fee, comment, installation_is_close, type', 'default', 'setOnEmpty' => true, 'value' => null),
+			array('id, plate, daily_license_fee, fio, is_act, is_conctract, contract_number, act_number, balance_license_fee, comment, installation_is_close, type', 'safe', 'on'=>'search'),
 		);
 	}
 
 	public function relations() {
 		return array(
+			'licenseDailyFeeAmountByCars' => array(self::HAS_MANY, 'LicenseDailyFeeAmountByCar', 'plate'),
 			'payments' => array(self::HAS_MANY, 'Payments', 'plate'),
+            'glonass'=>array(self::HAS_ONE, 'Glonass', array('num_auto'=>'plate')),
 		);
 	}
 
@@ -76,6 +82,8 @@ abstract class BaseTrucks extends GxActiveRecord {
 			'balance_license_fee' => Yii::t('app', 'Balance License Fee'),
 			'comment' => Yii::t('app', 'Comment'),
 			'installation_is_close' => Yii::t('app', 'Installation Is Close'),
+			'type' => Yii::t('app', 'Type'),
+			'licenseDailyFeeAmountByCars' => null,
 			'payments' => null,
 		);
 	}
@@ -94,6 +102,7 @@ abstract class BaseTrucks extends GxActiveRecord {
 		$criteria->compare('balance_license_fee', $this->balance_license_fee);
 		$criteria->compare('comment', $this->comment, true);
 		$criteria->compare('installation_is_close', $this->installation_is_close);
+		$criteria->compare('type', $this->type);
 
 		return new CActiveDataProvider($this, array(
 			'criteria' => $criteria,

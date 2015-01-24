@@ -70,6 +70,18 @@ class AccessoryFunctions extends  CHtml
 
     }
 
+
+    public static function addZeroTodeviceId( $deviceId ){
+
+        if(strlen($deviceId)<8){
+            do{
+                $deviceId = 0..$deviceId;
+            } while(strlen($deviceId) < 8);
+        }
+        return $deviceId;
+    }
+
+
     public static function emailValidation($email) {
         $regexp="/^[a-zA-Z0-9_\-.]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-.]+$/";
         return !preg_match($regexp, $email)?false:true;

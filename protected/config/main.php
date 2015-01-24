@@ -110,6 +110,7 @@ return array(
         */
 
 
+
         'errorHandler'=>array(
             // use 'front/error' action to display errors
             'errorAction'=>'/site/error',
@@ -125,6 +126,16 @@ return array(
             'charset' => 'cp1251',
         ),
 
+        'BNComplex'=>array(
+            //'class'=>'application.extensions.PHPPDO.CPdoDbConnection',
+            // 'pdoClass'=>'PHPPDO',
+
+            'class' => 'system.db.CDBConnection',
+            'connectionString' => 'sqlsrv:Server=192.168.2.200;database=BNComplex',
+            'username' => 'sa',
+            'password' => 'BNComplex1',
+            'charset' => 'utf8',
+        ),
 
 
     ),

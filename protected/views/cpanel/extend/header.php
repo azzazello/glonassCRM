@@ -15,9 +15,9 @@
 
             <div class="pull-right">
 
-                <!--<form class="form form-search" action="search-results.html">
-                    <input type="search" class="form-control" placeholder="Search" />
-                </form>-->
+                <form class="form form-search" action="<?=$this->createUrl("/trucks/list",array("search"=>1))?>" method="post">
+                    <input type="search" class="form-control" name="plate" placeholder="Номер авто" autofocus="autofocus"/>
+                </form>
 
                 <div class="btn-group btn-group-list btn-group-notification">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">

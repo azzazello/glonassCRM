@@ -8,7 +8,7 @@
             <small class="text-muted">Янчег</small>
         </div>
     </div><!-- media -->
-
+    <form action="<?$this->createUrl("/trucks/list",array("search"=>1))?>" method="post"><input type="text" name="plate" value="" maxlength="9"></form>
     <h5 class="leftpanel-title">Навигация</h5>
     <ul class="nav nav-pills nav-stacked">
         <li class="active"><a href="<?=$this->createUrl("/site/index")?>"><i class="fa fa-home"></i> <span>Главная страница</span></a></li>

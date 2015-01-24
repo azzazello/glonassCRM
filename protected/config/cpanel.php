@@ -2,6 +2,7 @@
 return CMap::mergeArray(
     require(dirname(__FILE__).'/main.php'),
     array(
+
         'components'=>array(
             'user'=>array(
                 // enable cookie-based authentication
