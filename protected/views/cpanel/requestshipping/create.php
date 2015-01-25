@@ -46,7 +46,7 @@
     <div class="form-group">
         <label class="col-sm-4 control-label">Дата платежа(z отчета):</label>
         <div class="col-sm-8">
-            <input class="form-control maskdate" name='date' >
+            <input class="form-control maskdate" name='date' id="zreport">
         </div>
     </div>
 
@@ -150,6 +150,14 @@
 
         });
         $(".maskdate").mask("9999-99-99");
+        $("#zreport").keypress(function(){
+
+            if ($(this).length == 10 )  {
+                $.get("<?=$this->createUrl("/ajax/checkzreport")?>",{"date":$(this).val()},function(data){
+                        if (data == "false") { prompt("Создать z-отчет")}
+                });
+            }
+        });
     });
 
 </script>

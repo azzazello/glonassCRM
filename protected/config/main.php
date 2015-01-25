@@ -126,7 +126,7 @@ return array(
             'charset' => 'cp1251',
         ),
 
-        'BNComplex'=>array(
+       /* 'BNComplex'=>array(
             //'class'=>'application.extensions.PHPPDO.CPdoDbConnection',
             // 'pdoClass'=>'PHPPDO',
 
@@ -136,7 +136,7 @@ return array(
             'password' => 'BNComplex1',
             'charset' => 'utf8',
         ),
-
+*/
 
     ),
 

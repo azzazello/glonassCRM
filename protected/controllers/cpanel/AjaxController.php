@@ -64,4 +64,11 @@ class AjaxController extends ControlerCPanel
                 echo "bad";
             }
     }
+    public function actionCheckzreport() {
+        $date = $_GET["date"];
+        $zreport = ZReport::model()->findAll("date=:date",array(":date"=>$date));
+        if ($zreport) {  CJSON::encode($zreport); } else echo "false";
+
+
+    }
 }

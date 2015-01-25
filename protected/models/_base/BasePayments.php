@@ -15,7 +15,9 @@
  * @property integer $amount_fee_license
  * @property string $date
  * @property string $comment
+ * @property integer $zreport
  *
+ * @property ZReport $zreport0
  * @property Trucks $plate0
  */
 abstract class BasePayments extends GxActiveRecord {
@@ -39,16 +41,17 @@ abstract class BasePayments extends GxActiveRecord {
 	public function rules() {
 		return array(
 			array('plate, date', 'required'),
-			array('amount_installation, amount_fee_license', 'numerical', 'integerOnly'=>true),
+			array('amount_installation, amount_fee_license, zreport', 'numerical', 'integerOnly'=>true),
 			array('plate', 'length', 'max'=>25),
 			array('comment', 'safe'),
-			array('amount_installation, amount_fee_license, comment', 'default', 'setOnEmpty' => true, 'value' => null),
-			array('id, plate, amount_installation, amount_fee_license, date, comment', 'safe', 'on'=>'search'),
+			array('amount_installation, amount_fee_license, comment, zreport', 'default', 'setOnEmpty' => true, 'value' => null),
+			array('id, plate, amount_installation, amount_fee_license, date, comment, zreport', 'safe', 'on'=>'search'),
 		);
 	}
 
 	public function relations() {
 		return array(
+			'zreport0' => array(self::BELONGS_TO, 'ZReport', 'zreport'),
 			'plate0' => array(self::BELONGS_TO, 'Trucks', 'plate'),
 		);
 	}
@@ -66,6 +69,8 @@ abstract class BasePayments extends GxActiveRecord {
 			'amount_fee_license' => Yii::t('app', 'Amount Fee License'),
 			'date' => Yii::t('app', 'Date'),
 			'comment' => Yii::t('app', 'Comment'),
+			'zreport' => null,
+			'zreport0' => null,
 			'plate0' => null,
 		);
 	}
@@ -79,6 +84,7 @@ abstract class BasePayments extends GxActiveRecord {
 		$criteria->compare('amount_fee_license', $this->amount_fee_license);
 		$criteria->compare('date', $this->date, true);
 		$criteria->compare('comment', $this->comment, true);
+		$criteria->compare('zreport', $this->zreport);
 
 		return new CActiveDataProvider($this, array(
 			'criteria' => $criteria,
